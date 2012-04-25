@@ -1,0 +1,29 @@
+topicprefix = /topic/
+main_collective = mcollective
+collectives = mcollective
+libdir = <%= mcollective_libdir %>
+logfile = /var/log/mcollective.log
+loglevel = info
+daemonize = <%= mcollective_daemonize %>
+
+# Plugins
+securityprovider = psk
+plugin.psk = <%= mcollective_psk %>
+
+connector = stomp
+plugin.stomp.host = <%= stomp_broker %>
+plugin.stomp.port = <%= stomp_port %>
+plugin.stomp.user = guest
+plugin.stomp.password = guest
+
+plugin.puppetca.cadir = /srv/puppetca/ca/
+
+# Facts
+factsource = yaml
+plugin.yaml = /etc/mcollective/facts.yaml
+
+classesfile = /var/lib/puppet/state/classes.txt
+
+registerinterval = 300
+registration = Agentlist
+
