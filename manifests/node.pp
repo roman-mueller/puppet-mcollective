@@ -56,13 +56,6 @@ class mcollective::node {
     require   => Package["mcollective"],
   }
 
-  # This is ugly, but until the init script gets fixed
-  # we need to ensure that only 
-  exec {'pkill -f mcollectived':
-    onlyif => 'test $(pgrep -f mcollectived | wc -l) -gt 1',
-    #notify => Service['mcollective'],
-  }
-
   file { "/etc/mcollective/server.cfg":
     mode    => 0640,
     owner   => "root",
