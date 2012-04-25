@@ -30,14 +30,15 @@ class mcollective::node {
       $mcollective_libdir = '/usr/share/mcollective/plugins'
     }
 
-    /CentOS/: {
-      package { 'rubygem-net-ping':
+    /RedHat|CentOS/: {
+      package { ['rubygem-net-ping', 'rubygem-stomp']:
         ensure => present,
+        notify => Service['mcollective'],
       }
 
       package { "mcollective":
         ensure  => present,
-        require => Package['rubygem-net-ping'],
+        require => [Package['rubygem-stomp'], Package['rubygem-net-ping']],
       }
 
       $mcollective_libdir = '/usr/libexec/mcollective'
