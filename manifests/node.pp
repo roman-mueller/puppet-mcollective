@@ -1,6 +1,6 @@
 class mcollective::node {
 
-  include ruby::gems
+  include ::ruby::gems
 
   # Upstart requires daemonize to be set to 0
   # warning: do not name this variable $daemonize!
@@ -30,14 +30,15 @@ class mcollective::node {
       $mcollective_libdir = '/usr/share/mcollective/plugins'
     }
 
-    /CentOS/: {
-      package { 'rubygem-net-ping':
+    /RedHat|CentOS/: {
+      package { ['rubygem-net-ping', 'rubygem-stomp']:
         ensure => present,
+        notify => Service['mcollective'],
       }
 
       package { "mcollective":
         ensure  => present,
-        require => Package['rubygem-net-ping'],
+        require => [Package['rubygem-stomp'], Package['rubygem-net-ping']],
       }
 
       $mcollective_libdir = '/usr/libexec/mcollective'
@@ -49,30 +50,32 @@ class mcollective::node {
 
   }
 
-  service { "mcollective":
+  service { 'mcollective':
     ensure    => running,
     hasstatus => true,
     enable    => true,
-    require   => Package["mcollective"],
+    require   => Package['mcollective'],
   }
 
-  file { "/etc/mcollective/server.cfg":
-    mode    => 0640,
-    owner   => "root",
-    group   => "root",
-    content => template("mcollective/server.cfg.erb"),
-    notify  => Service["mcollective"],
-    require => Package["mcollective"],
+  file { '/etc/mcollective/server.cfg':
+    ensure  => present,
+    mode    => '0640',
+    owner   => 'root',
+    group   => 'root',
+    content => template('mcollective/server.cfg.erb'),
+    notify  => Service['mcollective'],
+    require => Package['mcollective'],
   }
 
-  file { "/etc/mcollective/facts.yaml":
-    owner    => "root",
-    group    => "root",
-    mode     => 400,
+  file { '/etc/mcollective/facts.yaml':
+    ensure  => present,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0400',
     loglevel => debug,  # this is needed to avoid it being logged and reported on every run
     # avoid including highly-dynamic facts as they will cause unnecessary template writes
-    content  => inline_template("<%= scope.to_hash.reject { |k,v| k.to_s =~ /(uptime|timestamp|free)/ }.to_yaml %>"),
-    require  => Package["mcollective"],
+    content  => inline_template('<%= scope.to_hash.reject { |k,v| k.to_s =~ /(uptime|timestamp|free)/ }.to_yaml %>'),
+    require  => Package['mcollective'],
   }
 
 }
