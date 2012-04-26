@@ -23,4 +23,11 @@ class mcollective::client {
     content => template('mcollective/client.cfg.erb'),
     require => Package['mcollective'],
   }
+
+  file { '/etc/bash_completion.d/mco':
+    mode    => '0755',
+    owner   => 'root',
+    group   => 'root',
+    source  => 'puppet:///modules/mcollective/bash_completion.sh',
+  }
 }
