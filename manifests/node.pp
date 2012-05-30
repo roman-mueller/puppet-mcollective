@@ -1,6 +1,6 @@
 class mcollective::node {
 
-  include ::ruby::gems
+  include ruby::gems
 
   # Upstart requires daemonize to be set to 0
   # warning: do not name this variable $daemonize!
