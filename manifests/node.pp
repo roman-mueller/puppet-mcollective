@@ -60,6 +60,11 @@ class mcollective::node {
     require   => Package['mcollective'],
   }
 
+  exec { 'reload mcollective':
+    command     => 'pkill -USR1 -f "ruby.*mcollectived"',
+    refreshonly => true,
+  }
+
   file { '/etc/mcollective/server.cfg':
     ensure  => present,
     mode    => '0640',
