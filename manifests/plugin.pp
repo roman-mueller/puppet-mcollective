@@ -9,6 +9,6 @@ define mcollective::plugin (
 
   package { $package:
     ensure => $ensure,
-#    notify => Service['mcollective'],
+    notify => Exec['reload mcollective'],
   }
 }
