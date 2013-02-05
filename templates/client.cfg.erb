@@ -15,8 +15,10 @@ plugin.rabbitmq.vhost = <%= @vhost %>
 <% end %>
 plugin.<%= @connector %>.pool.size = 1
 plugin.<%= @connector %>.pool.1.host = <%= @stomp_broker %>
+<% if @user and @user != '' %>
 plugin.<%= @connector %>.pool.1.user = <%= @user %>
 plugin.<%= @connector %>.pool.1.password = <%= @password %>
+<% end %>
 plugin.<%= @connector %>.pool.1.ssl = <%= @ssl %>
 <% if @ssl %>
 plugin.<%= @connector %>.pool.1.port = <%= @stomp_ssl_port %>
