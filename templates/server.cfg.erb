@@ -33,6 +33,14 @@ plugin.<%= @connector %>.pool.1.ssl.key = <%= @broker_ssl_key %>
 plugin.<%= @connector %>.pool.1.ssl.ca = <%= @broker_ssl_ca %>
 <% end %>
 
+<% if @rpcauthorization %>
+# Authorization
+rpcauthorization = 1
+rpcauthprovider = <%= @rpcauthprovider %>
+plugin.<%= @rpcauthprovider %>.allow_unconfigured = 0
+plugin.<%= @rpcauthprovider %>.enable_default = 1
+<% end %>
+
 plugin.puppetca.cadir = <%= @puppetca_cadir %>
 
 # Facts
