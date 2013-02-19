@@ -1,22 +1,24 @@
 class mcollective::node (
-  $security_provider = 'psk',
-  $security_secret = $::mcollective_psk,
+  $broker_host,
+  $broker_port,
+  $security_provider,
+  $broker_vhost = '/mcollective',
+  $broker_user = 'guest',
+  $broker_password = 'guest',
+  $broker_ssl = true,
+  $broker_ssl_cert = "/var/lib/puppet/ssl/certs/${::fqdn}.pem",
+  $broker_ssl_key = "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem",
+  $broker_ssl_ca = '/var/lib/puppet/ssl/certs/ca.pem',
+  $security_secret = '',
+  $security_ssl_private = '/etc/mcollective/ssl/server-private.pem',
+  $security_ssl_public = '/etc/mcollective/ssl/server-public.pem',
   $connector = 'rabbitmq',
-  $vhost = '/mcollective',
-  $host = $::stomp_broker,
-  $port = $::stomp_port,
-  $ssl_port = $::stomp_ssl_port,
-  $user = 'guest',
-  $password = 'guest',
-  $ssl = true,
-  $ssl_cert = "/var/lib/puppet/ssl/certs/${::fqdn}.pem",
-  $ssl_key = "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem",
-  $ssl_ca = '/var/lib/puppet/ssl/certs/ca.pem',
+  $puppetca_cadir = '/srv/puppetca/ca/',
 ) {
 
   include ruby::gems
 
-  # Recent Upstart requires daemonize to be set to 0 
+  # Recent Upstart requires daemonize to be set to 0
   # warning: do not name this variable $daemonize!
   $mcollective_daemonize = $::operatingsystem ? {
     'Ubuntu' => $::lsbdistcodename ? {
@@ -107,5 +109,4 @@ class mcollective::node (
     content  => inline_template('<%= scope.to_hash.reject { |k,v| k.to_s =~ /(uptime|timestamp|free)/ }.to_yaml %>'),
     require  => Package['mcollective'],
   }
-
 }
