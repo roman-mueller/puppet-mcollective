@@ -27,10 +27,6 @@ class mcollective::node (
   # Recent Upstart requires daemonize to be set to 0
   # warning: do not name this variable $daemonize!
   $mcollective_daemonize = $::operatingsystem ? {
-    'Ubuntu' => $::lsbdistcodename ? {
-      'lucid' => 1,
-      default => 0
-    },
     default => 1
   }
 
