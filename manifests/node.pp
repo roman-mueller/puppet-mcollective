@@ -17,6 +17,7 @@ class mcollective::node (
   $rpcauthorization = false,
   $rpcauthprovider = 'action_policy',
   $cert_dir = '/etc/mcollective/ssl/clients',
+  $policies_dir = '/etc/mcollective/policies',
 ) {
 
   include ruby::gems
@@ -32,6 +33,15 @@ class mcollective::node (
   }
 
   file { $cert_dir:
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0700',
+    recurse => true,
+    purge   => true,
+  }
+
+  file { $policies_dir:
     ensure  => directory,
     owner   => 'root',
     group   => 'root',
