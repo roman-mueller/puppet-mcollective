@@ -14,6 +14,8 @@ class mcollective::node (
   $security_ssl_public = '/etc/mcollective/ssl/server-public.pem',
   $connector = 'rabbitmq',
   $puppetca_cadir = '/srv/puppetca/ca/',
+  $rpcauthorization = false,
+  $rpcauthprovider = 'action_policy',
 ) {
 
   include ruby::gems
