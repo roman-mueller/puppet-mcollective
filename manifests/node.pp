@@ -16,6 +16,7 @@ class mcollective::node (
   $puppetca_cadir = '/srv/puppetca/ca/',
   $rpcauthorization = false,
   $rpcauthprovider = 'action_policy',
+  $cert_dir = '/etc/mcollective/ssl/clients',
 ) {
 
   include ruby::gems
@@ -28,6 +29,15 @@ class mcollective::node (
       default => 0
     },
     default => 1
+  }
+
+  file { $cert_dir:
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0700',
+    recurse => true,
+    purge   => true,
   }
 
   case $::operatingsystem {
