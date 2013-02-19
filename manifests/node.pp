@@ -16,6 +16,8 @@ class mcollective::node (
   $puppetca_cadir = '/srv/puppetca/ca/',
   $rpcauthorization = false,
   $rpcauthprovider = 'action_policy',
+  $rpcauth_allow_unconfigured = 0,
+  $rpcauth_enable_default = 1,
   $cert_dir = '/etc/mcollective/ssl/clients',
   $policies_dir = '/etc/mcollective/policies',
 ) {
