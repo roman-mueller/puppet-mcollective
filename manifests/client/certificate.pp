@@ -4,7 +4,7 @@ define mcollective::client::certificate (
   $cert_dir = '/etc/mcollective/ssl/clients',
 ) {
   file {
-    "${cert_dir}/${name}-public.pem":
+    "${cert_dir}/${name}.pem":
       ensure => $ensure,
       owner  => 'root',
       group  => 'root',
