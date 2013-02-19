@@ -37,9 +37,11 @@ plugin.<%= @connector %>.pool.1.ssl.ca = <%= @broker_ssl_ca %>
 # Authorization
 rpcauthorization = 1
 rpcauthprovider = <%= @rpcauthprovider %>
-plugin.<%= @rpcauthprovider %>.allow_unconfigured = <%= @rpcauth_allow_unconfigured %>
-plugin.<%= @rpcauthprovider %>.enable_default = <%= @rpcauth_enable_default %>
-<% end %>
+<% if @rpcauthprovider == 'action_policy' %>
+plugin.actionpolicy.allow_unconfigured = <%= @rpcauth_allow_unconfigured %>
+plugin.actionpolicy.enable_default = <%= @rpcauth_enable_default %>
+<%- end %>
+<%- end %>
 
 plugin.puppetca.cadir = <%= @puppetca_cadir %>
 
