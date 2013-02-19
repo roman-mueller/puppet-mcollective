@@ -34,22 +34,14 @@ class mcollective::node (
     default => 1
   }
 
-  file { $cert_dir:
+  file { [$cert_dir, $policies_dir]:
     ensure  => directory,
     owner   => 'root',
     group   => 'root',
     mode    => '0700',
     recurse => true,
     purge   => true,
-  }
-
-  file { $policies_dir:
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0700',
-    recurse => true,
-    purge   => true,
+    require => Package['mcollective'],
   }
 
   case $::operatingsystem {
