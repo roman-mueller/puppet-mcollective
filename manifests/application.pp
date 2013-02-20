@@ -1,3 +1,22 @@
+# Definition: mcollective::application
+#
+# Deploys an MCollective application.
+#
+# You should declare mcollective::client before using this.
+#
+# Parameters:
+#   ['ensure']  - Whether the plugin should be present or absent.
+#   ['source']  - Where to get the application from.
+#                 Defaults to "puppet:///modules/${module_name}/application/${name}.rb"
+#
+# Actions:
+# - Deploys an MCollective application.
+#
+# Sample Usage:
+#   mcollective::application { 'healthcheck':
+#     ensure         => present,
+#   }
+#
 define mcollective::application (
   $ensure='present',
   $source=''
@@ -5,7 +24,7 @@ define mcollective::application (
   include ::mcollective::client
 
   $filesrc = $source ? {
-    ''      => "puppet:///modules/mcollective/application/${name}.rb",
+    ''      => "puppet:///modules/${module_name}/application/${name}.rb",
     default => $source,
   }
 
