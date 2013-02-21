@@ -7,6 +7,28 @@ It supports:
 * PSK and SSL security providers
 * Action policy rules
 
+## Simple usage
+
+This module has a single access point class:
+
+    class { '::mcollective':
+      broker_host       => 'rabbitmq.example.com',
+      broker_port       => '61613',
+      broker_ssl        => false,
+      security_provider => 'psk',
+      security_secret   => 'P@S5w0rD',
+      node              => true,
+      client            => false,
+    }
+
+    class { '::mcollective':
+      broker_host       => 'rabbitmq.example.com',
+      broker_port       => '61614',
+      security_provider => 'ssl',
+      node              => true,
+      client            => true,
+    }
+
 ## Classes
 
 This module provides two classes to configure MCollective nodes and clients.
@@ -40,9 +62,9 @@ Installs and configures an MCollective client:
     }
  
     class { '::mcollective::client':
-      broker_host                 => 'rabbitmq.example.com',
-      broker_port                 => '61614',
-      security_provider           => 'ssl',
+      broker_host       => 'rabbitmq.example.com',
+      broker_port       => '61614',
+      security_provider => 'ssl',
     }
 
 ## Definitions
@@ -54,7 +76,7 @@ Several definitions allow to enhance MCollective nodes and clients.
 Installs an MCollective plugin using packages:
 
     mcollective::plugin { 'puppetca':
-      ensure         => present,
+      ensure => present,
     }
 
 ### mcollective::application
@@ -62,7 +84,7 @@ Installs an MCollective plugin using packages:
 Installs an MCollective application from a file:
 
     mcollective::application { 'healthcheck':
-      ensure         => present,
+      ensure => present,
     }
 
 ### mcollective::client::certificate
@@ -70,7 +92,7 @@ Installs an MCollective application from a file:
 Deploys a public client SSL certificate for authentication:
 
     mcollective::client::certificate { 'foo':
-      ensure  => present,
+      ensure         => present,
       key_source_dir => 'puppet:///module_name/path/to/dir/',
     }
 
@@ -87,10 +109,10 @@ Sets up an base action policy file for an agent:
 Sets up an action policy rule for an agent:
 
     mcollective::actionpolicy { 'Allow puppetd status for cert foo':
-      ensure         => present,
-      agent          => 'puppetd',
-      rpccaller      => 'cert=foo',
-      actions        => 'status',
+      ensure    => present,
+      agent     => 'puppetd',
+      rpccaller => 'cert=foo',
+      actions   => 'status',
     }
 
 

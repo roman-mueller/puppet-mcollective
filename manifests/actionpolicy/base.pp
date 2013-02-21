@@ -9,8 +9,6 @@
 #
 # Parameters:
 #   ['ensure']         - Whether the policy rule should be present or absent.
-#   ['policies_dir']   - Where the policy rules are stored.
-#                        Defaults to '/etc/mcollective/policies'.
 #   ['default_policy'] - The default policy to apply.
 #                        Defaults to 'deny'.
 #
@@ -24,9 +22,14 @@
 #
 define mcollective::actionpolicy::base (
   $ensure = 'present',
-  $policies_dir = '/etc/mcollective/policies',
   $default_policy = 'deny',
 ) {
+  if defined(Class['mcollective::node']) {
+    $policies_dir = $mcollective::node::policies_dir
+  } else {
+    fail('You must declare the mcollective::node class before you can use mcollective::actionpolicy::base')
+  }
+
   include concat::setup
 
   concat { "${policies_dir}/${name}.policy":

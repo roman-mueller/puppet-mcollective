@@ -21,7 +21,9 @@ define mcollective::application (
   $ensure='present',
   $source=''
 ) {
-  include ::mcollective::client
+  if !defined(Class['mcollective::client']) {
+    fail('You must declare class mcollective::client before using mcollective::application')
+  }
 
   $filesrc = $source ? {
     ''      => "puppet:///modules/${module_name}/application/${name}.rb",

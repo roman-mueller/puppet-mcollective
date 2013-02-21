@@ -27,8 +27,6 @@
 #                        Defaults to ['*'].
 #   ['order']          - Order for concatenation.
 #                        Defaults to 50.
-#   ['policies_dir']   - Where the policy rules are stored.
-#                        Defaults to '/etc/mcollective/policies'.
 #
 # Actions:
 # - Deploys an MCollective Action Policy rule for an agent
@@ -59,7 +57,6 @@ define mcollective::actionpolicy (
   $facts = ['*'],
   $classes = ['*'],
   $order = '50',
-  $policies_dir = '/etc/mcollective/policies',
 ) {
   $_rpccaller = $rpccaller ? {
     ''      => inline_template('<%= @name.split("@")[0] %>'),
@@ -71,6 +68,17 @@ define mcollective::actionpolicy (
     default => $agent,
   }
 
+  if !defined(Mcollective::Actionpolicy::Base[$_agent]) {
+    fail("You must declare an mcollective::actionpolicy::base for agent '${_agent}' before you can declare rules for it")
+  }
+
+  if defined(Class['mcollective::node']) {
+    $policies_dir = $mcollective::node::policies_dir
+  } else {
+    fail('You must declare the mcollective::node class before you can use mcollective::actionpolicy')
+  }
+
+  validate_re($policies_dir, '/.*')
   validate_re($auth, 'allow|deny')
   validate_re($_rpccaller, '(uid|cert)=\S+')
   validate_re($_agent, '\S+')
