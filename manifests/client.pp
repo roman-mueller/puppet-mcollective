@@ -60,35 +60,27 @@ class mcollective::client (
   $broker_host,
   $broker_port,
   $security_provider,
-  $broker_vhost = '/mcollective',
-  $broker_user = 'guest',
-  $broker_password = 'guest',
-  $broker_ssl = true,
-  $broker_ssl_cert = "/var/lib/puppet/ssl/certs/${::fqdn}.pem",
-  $broker_ssl_key = "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem",
-  $broker_ssl_ca = '/var/lib/puppet/ssl/certs/ca.pem',
-  $security_secret = '',
-  $security_ssl_server_public = '/etc/mcollective/ssl/server-public.pem',
-  $security_ssl_client_private = false,
-  $security_ssl_client_public = false,
-  $connector = 'rabbitmq',
-  $puppetca_cadir = '/srv/puppetca/ca/',
-) {
-
-  $client_require = $::operatingsystem ? {
-    /Debian|Ubuntu/ => [Package['rubygems'], Package['ruby-stomp']],
-    /RedHat|CentOS/ => [Package['rubygems'], Package['rubygem-stomp']],
-  }
+  $broker_vhost = $mcollective::params::broker_vhost,
+  $broker_user = $mcollective::params::broker_user,
+  $broker_password = $mcollective::params::broker_password,
+  $broker_ssl = $mcollective::params::broker_ssl,
+  $broker_ssl_cert = $mcollective::params::broker_ssl_cert,
+  $broker_ssl_key = $mcollective::params::broker_ssl_key,
+  $broker_ssl_ca = $mcollective::params::broker_ssl_ca,
+  $security_secret = $mcollective::params::security_secret,
+  $security_ssl_server_public = $mcollective::params::security_ssl_server_public,
+  $security_ssl_client_private = $mcollective::params::security_ssl_client_private,
+  $security_ssl_client_public = $mcollective::params::security_ssl_client_public,
+  $connector = $mcollective::params::connector,
+  $puppetca_cadir = $mcollective::params::puppetca_cadir,
+) inherits ::mcollective::params {
 
   package { 'mcollective-client':
     ensure  => present,
-    require => $client_require,
+    require => $mcollective::params::client_require
   }
 
-  $mcollective_libdir = $::operatingsystem ? {
-    /Debian|Ubuntu/ => '/usr/share/mcollective/plugins',
-    /RedHat|CentOS/ => '/usr/libexec/mcollective',
-  }
+  $mcollective_libdir = $mcollective::params::libdir
 
   file { '/etc/mcollective/client.cfg':
     mode    => '0644',

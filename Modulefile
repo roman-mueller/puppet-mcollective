@@ -1,0 +1,8 @@
+name         'camptocamp-mcollective'
+version      '0.0.1'
+source       'https://github.com/camptocamp/puppet-mcollective'
+author       'DevOps Team / Camptocamp'
+license      'GNU GPLv3'
+summary      'Camptocamp MCollective Module'
+description  'MCollective Module for Puppet'
+project_page 'https://github.com/camptocamp/puppet-mcollective'

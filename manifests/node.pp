@@ -72,25 +72,25 @@ class mcollective::node (
   $broker_host,
   $broker_port,
   $security_provider,
-  $broker_vhost = '/mcollective',
-  $broker_user = 'guest',
-  $broker_password = 'guest',
-  $broker_ssl = true,
-  $broker_ssl_cert = "/var/lib/puppet/ssl/certs/${::fqdn}.pem",
-  $broker_ssl_key = "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem",
-  $broker_ssl_ca = '/var/lib/puppet/ssl/certs/ca.pem',
-  $security_secret = '',
-  $security_ssl_private = '/etc/mcollective/ssl/server-private.pem',
-  $security_ssl_public = '/etc/mcollective/ssl/server-public.pem',
-  $connector = 'rabbitmq',
-  $puppetca_cadir = '/srv/puppetca/ca/',
-  $rpcauthorization = false,
-  $rpcauthprovider = 'action_policy',
-  $rpcauth_allow_unconfigured = 0,
-  $rpcauth_enable_default = 1,
-  $cert_dir = '/etc/mcollective/ssl/clients',
-  $policies_dir = '/etc/mcollective/policies',
-) {
+  $broker_vhost = $mcollective::params::broker_vhost,
+  $broker_user = $mcollective::params::broker_user,
+  $broker_password = $mcollective::params::broker_password,
+  $broker_ssl = $mcollective::params::broker_ssl,
+  $broker_ssl_cert = $mcollective::params::broker_ssl_cert,
+  $broker_ssl_key = $mcollective::params::broker_ssl_key,
+  $broker_ssl_ca = $mcollective::params::broker_ssl_ca,
+  $security_secret = $mcollective::params::security_secret,
+  $security_ssl_private = $mcollective::params::security_ssl_server_private,
+  $security_ssl_public = $mcollective::params::security_ssl_server_public,
+  $connector = $mcollective::params::connector,
+  $puppetca_cadir = $mcollective::params::puppetca_cadir,
+  $rpcauthorization = $mcollective::params::rpcauthorization,
+  $rpcauthprovider = $mcollective::params::rpcauthprovider,
+  $rpcauth_allow_unconfigured = $mcollective::params::rpcauth_allow_unconfigured,
+  $rpcauth_enable_default = $mcollective::params::rpcauth_enable_default,
+  $cert_dir = $mcollective::params::cert_dir,
+  $policies_dir = $mcollective::params::policies_dir,
+) inherits ::mcollective::params {
 
   include ruby::gems
 
@@ -110,9 +110,11 @@ class mcollective::node (
     require => Package['mcollective'],
   }
 
-  case $::operatingsystem {
+  $mcollective_libdir = $mcollective::params::libdir
 
-    /Debian|Ubuntu/: {
+  case $::osfamily {
+
+    'Debian': {
 
       package { 'libstomp-ruby':
         ensure => absent,
@@ -123,11 +125,6 @@ class mcollective::node (
         notify  => Service['mcollective'],
       }
 
-      package { 'mcollective':
-        ensure  => present,
-        require => [Package['rubygems'], Package['ruby-stomp']],
-      }
-
       augeas { 'Enable mcollective':
         lens    => 'Shellvars.lns',
         incl    => '/etc/default/mcollective',
@@ -136,27 +133,25 @@ class mcollective::node (
         notify  => Service['mcollective'],
       }
 
-      $mcollective_libdir = '/usr/share/mcollective/plugins'
     }
 
-    /RedHat|CentOS/: {
+    'RedHat': {
       package { ['rubygem-net-ping', 'rubygem-stomp']:
         ensure => present,
         notify => Service['mcollective'],
       }
 
-      package { "mcollective":
-        ensure  => present,
-        require => [Package['rubygem-stomp'], Package['rubygem-net-ping']],
-      }
-
-      $mcollective_libdir = '/usr/libexec/mcollective'
     }
 
     default: {
-      fail("Unsupported operating system: ${::operatingsystem}")
+      fail("Unsupported OS family: ${::osfamily}")
     }
 
+  }
+
+  package { 'mcollective':
+    ensure  => present,
+    require => $mcollective::params::server_require,
   }
 
   service { 'mcollective':
