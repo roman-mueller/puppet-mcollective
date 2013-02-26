@@ -178,6 +178,7 @@ class mcollective::node (
 
   file { '/etc/mcollective/facts.yaml':
     ensure   => present,
+    backup   => false,
     owner    => 'root',
     group    => 'root',
     mode     => '0400',
