@@ -1,0 +1,4 @@
+---
+<% scope.to_hash.reject{ |k,v| k.to_s =~ /(uptime|timestamp|free|require)/ }.sort.each do |k, v| -%>
+  <%= "#{k}: " %><%= "[\"#{v.sort.join('","')}\"]" if v.is_a?(Array) %><%= "\"#{v}\"" if v.is_a?(String) %>
+<%- end %>
