@@ -20,6 +20,12 @@ plugin.ssl_client_public = <%= @security_ssl_client_public %>
 <% end -%>
 plugin.ssl_client_cert_dir = /etc/mcollective/ssl/clients/
 <% end %>
+<% if @security_provider == 'aes_security' -%>
+plugin.aes.client_private = <%= @security_aes_client_private %>
+plugin.aes.client_public = <%= @security_aes_client_public %>
+plugin.aes.send_pubkey = <%= @security_aes_send_pubkey %>
+plugin.aes.learn_pubkeys = <%= @security_aes_learn_pubkeys %>
+<% end -%>
 
 connector = <%= @connector %>
 <% if @connector == 'rabbitmq' %>

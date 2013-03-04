@@ -71,6 +71,10 @@ class mcollective::client (
   $security_ssl_server_public = $mcollective::params::security_ssl_server_public,
   $security_ssl_client_private = $mcollective::params::security_ssl_client_private,
   $security_ssl_client_public = $mcollective::params::security_ssl_client_public,
+  $security_aes_client_private = $mcollective::params::security_aes_client_private,
+  $security_aes_client_public = $mcollective::params::security_aes_client_public,
+  $security_aes_send_pubkey = $mcollective::params::security_aes_send_pubkey,
+  $security_aes_learn_pubkeys = $mcollective::params::security_aes_learn_pubkeys,
   $connector = $mcollective::params::connector,
   $puppetca_cadir = $mcollective::params::puppetca_cadir,
 ) inherits ::mcollective::params {
