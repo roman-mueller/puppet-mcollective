@@ -3,7 +3,7 @@
 **This module manages MCollective.**
 
 It supports:
-* generic STOMP and RabbitMQ connectors (optionally over SSL)
+* generic STOMP, ActiveMQ and RabbitMQ connectors (optionally over SSL)
 * PSK and SSL security providers
 * Action policy rules
 

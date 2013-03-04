@@ -3,7 +3,7 @@
 # This class provides a simple way to deploy MCollective nodes and clients.
 # It will install and configure the necessary packages.
 #
-# This module supports generic STOMP and RabbitMQ connectors,
+# This module supports generic STOMP, ActiveMQ and RabbitMQ connectors,
 # with optional SSL support.
 #
 # It supports PSK and SSL as authentication methods.
