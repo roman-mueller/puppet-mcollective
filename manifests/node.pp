@@ -186,8 +186,7 @@ class mcollective::node (
                         # on every run
                         # avoid including highly-dynamic facts as they will
                         # cause unnecessary template writes
-    content  => inline_template('<%= scope.to_hash.reject { |k,v|
-    k.to_s =~ /(uptime|timestamp|free)/ }.to_yaml %>'),
+    content  => template('mcollective/facts.yaml.erb'),
     require  => Package['mcollective'],
   }
 }
