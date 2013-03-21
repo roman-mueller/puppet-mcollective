@@ -1,4 +1,4 @@
-# simple_* and wrong_os tests
+# Default node to test defines
 node default {
   class { '::mcollective':
     broker_host       => 'localhost',
