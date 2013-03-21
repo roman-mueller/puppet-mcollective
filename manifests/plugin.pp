@@ -17,9 +17,9 @@ define mcollective::plugin (
   $ensure='present'
 ) {
 
-  $package = $::operatingsystem ? {
-    /Debian|Ubuntu/ => "mcollective-agent-${name}",
-    /RedHat|CentOS/ => "mcollective-plugins-${name}",
+  $package = $::osfamily ? {
+    'Debian' => "mcollective-agent-${name}",
+    'RedHat' => "mcollective-plugins-${name}",
   }
 
   package { $package:
