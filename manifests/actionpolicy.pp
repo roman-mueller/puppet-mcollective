@@ -63,10 +63,16 @@ define mcollective::actionpolicy (
     default => $rpccaller,
   }
 
+  validate_re($_rpccaller, '(uid|cert)=\S+',
+    "\$rpccaller must be of the form 'uid=' or 'cert=', got '${_rpccaller}'")
+
   $_agent = $agent ? {
     ''      => inline_template('<%= @name.split("@")[1] %>'),
     default => $agent,
   }
+
+  validate_re($_agent, '^\S+$',
+    "Wrong value for \$agent '${_agent}'")
 
   if !defined(Mcollective::Actionpolicy::Base[$_agent]) {
     fail("You must declare an mcollective::actionpolicy::base for agent '${_agent}' before you can declare rules for it")
@@ -78,10 +84,11 @@ define mcollective::actionpolicy (
     fail('You must declare the mcollective::node class before you can use mcollective::actionpolicy')
   }
 
-  validate_re($policies_dir, '/.*')
-  validate_re($auth, 'allow|deny')
-  validate_re($_rpccaller, '(uid|cert)=\S+')
-  validate_re($_agent, '\S+')
+  # Validate parameters
+  validate_re($policies_dir, '^/.*', # This should never happen
+    "\$policies_dir must be a valid path, got '${policies_dir}'")
+  validate_re($auth, '^(allow|deny)$',
+    "\$auth must be either 'allow' or 'deny', got '${auth}'")
   validate_array($actions)
   validate_array($facts)
   validate_array($classes)
