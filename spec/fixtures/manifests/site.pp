@@ -5,4 +5,6 @@ node default {
     broker_port       => '61613',
     security_provider => 'psk',
   }
+
+  ::mcollective::actionpolicy::base { 'foo': }
 }
