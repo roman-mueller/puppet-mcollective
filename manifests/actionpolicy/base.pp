@@ -15,6 +15,10 @@
 # Actions:
 # - Deploys a base MCollective Action Policy rule for an agent
 #
+# Requires:
+# - `ripienaar/concat`
+# - `puppetlabs/stdlib`
+#
 # Sample Usage:
 #   mcollective::actionpolicy::base { 'puppetd':
 #     ensure => present,
@@ -29,6 +33,14 @@ define mcollective::actionpolicy::base (
   } else {
     fail('You must declare the mcollective::node class before you can use mcollective::actionpolicy::base')
   }
+
+  # Validate parameters
+  validate_re($ensure, '^(present|absent)$',
+    "\$ensure must be either 'present' or 'absent', got '${ensure}'")
+  validate_re($policies_dir, '^/.*', # This should never happen
+    "\$policies_dir must be a valid path, got '${policies_dir}'")
+  validate_re($default_policy, '^(allow|deny)$',
+    "\$default_policy must be either 'allow' or 'deny', got '${default_policy}'")
 
   include concat::setup
 
