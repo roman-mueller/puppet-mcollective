@@ -100,4 +100,22 @@ describe 'mcollective::actionpolicy' do
     ) }
   end
 
+  context 'when overriding parameters' do
+    let (:title) { 'My beautiful action policy' }
+    let (:params) { {
+      :agent     => 'foo',
+      :rpccaller => 'uid=1001',
+      :auth      => 'deny',
+      :actions   => ['status', 'restart'],
+      :facts     => ['operatingsystem="Debian"'],
+      :classes   => ['mysite::myclass', 'mysite::myotherclass'],
+      :order     => '99',
+    } }
+    it { should contain_concat__fragment('mcollective.actionpolicy.My beautiful action policy').with(
+      :ensure  => :present,
+      :order   => '99',
+      :target  => '/etc/mcollective/policies/foo.policy',
+      :content => "deny\tuid=1001\tstatus restart\toperatingsystem=\"Debian\"\tmysite::myclass mysite::myotherclass\n",
+    ) }
+  end
 end
