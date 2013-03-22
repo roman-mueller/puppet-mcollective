@@ -1,5 +1,6 @@
 name         'camptocamp-mcollective'
 version      '0.0.1'
+dependency   'camptocamp/ruby', '0.0.1'
 source       'https://github.com/camptocamp/puppet-mcollective'
 author       'DevOps Team / Camptocamp'
 license      'GNU GPLv3'
