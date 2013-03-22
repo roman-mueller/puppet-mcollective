@@ -96,7 +96,7 @@ describe 'mcollective::actionpolicy' do
       :ensure  => :present,
       :order   => '50',
       :target  => '/etc/mcollective/policies/foo.policy',
-      :content => "allow\tcert=user\t*\t*\t*\n",
+      :content => "allow\tcert=user\t*\t*\t*\n"
     ) }
   end
 
@@ -109,13 +109,13 @@ describe 'mcollective::actionpolicy' do
       :actions   => ['status', 'restart'],
       :facts     => ['operatingsystem="Debian"'],
       :classes   => ['mysite::myclass', 'mysite::myotherclass'],
-      :order     => '99',
+      :order     => '99'
     } }
     it { should contain_concat__fragment('mcollective.actionpolicy.My beautiful action policy').with(
       :ensure  => :present,
       :order   => '99',
       :target  => '/etc/mcollective/policies/foo.policy',
-      :content => "deny\tuid=1001\tstatus restart\toperatingsystem=\"Debian\"\tmysite::myclass mysite::myotherclass\n",
+      :content => "deny\tuid=1001\tstatus restart\toperatingsystem=\"Debian\"\tmysite::myclass mysite::myotherclass\n"
     ) }
   end
 end
