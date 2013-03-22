@@ -92,7 +92,12 @@ describe 'mcollective::actionpolicy' do
   end
 
   context 'when using defaults' do
-    it { should contain_concat__fragment('mcollective.actionpolicy.cert=user@foo') }
+    it { should contain_concat__fragment('mcollective.actionpolicy.cert=user@foo').with(
+      :ensure  => :present,
+      :order   => '50',
+      :target  => '/etc/mcollective/policies/foo.policy',
+      :content => "allow\tcert=user\t*\t*\t*\n",
+    ) }
   end
 
 end
