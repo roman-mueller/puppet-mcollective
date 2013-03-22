@@ -7,6 +7,17 @@ describe 'mcollective::actionpolicy' do
     :operatingsystem => 'Debian'
   } }
 
+  context 'when using a wrong ensure value' do
+    let (:params) { {
+      :ensure => 'running'
+    } }
+
+    it 'should fail' do
+      expect { should contain_concat__fragment('mcollective.actionpolicy.cert=user@foo')
+      }.to raise_error(Puppet::Error, /\$ensure must be either.* got 'running'/)
+    end
+  end
+
   context 'when rpccaller contains spaces' do
     let (:params) { {
       :rpccaller => 'foo bar'

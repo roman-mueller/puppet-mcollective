@@ -85,6 +85,8 @@ define mcollective::actionpolicy (
   }
 
   # Validate parameters
+  validate_re($ensure, '^(present|absent)$',
+    "\$ensure must be either 'present' or 'absent', got '${ensure}'")
   validate_re($policies_dir, '^/.*', # This should never happen
     "\$policies_dir must be a valid path, got '${policies_dir}'")
   validate_re($auth, '^(allow|deny)$',
