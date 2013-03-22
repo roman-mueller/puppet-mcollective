@@ -94,7 +94,7 @@ define mcollective::actionpolicy (
   validate_array($classes)
 
   $fragment_title    = regsubst($name, '/', '_', 'G')
-  concat::fragment { "mcollective.actionpolicy.${_agent}.${fragment_title}":
+  concat::fragment { "mcollective.actionpolicy.${fragment_title}":
     ensure  => $ensure,
     order   => $order,
     target  => "${policies_dir}/${_agent}.policy",

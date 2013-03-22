@@ -13,7 +13,7 @@ describe 'mcollective::actionpolicy' do
     } }
 
     it 'should fail' do
-      expect { should contain_concat__fragment('mcollective.actionpolicy.foo.foo bar')
+      expect { should contain_concat__fragment('mcollective.actionpolicy.cert=user@foo')
       }.to raise_error(Puppet::Error, /\$rpccaller must be.* got 'foo bar'/)
     end
   end
@@ -22,7 +22,7 @@ describe 'mcollective::actionpolicy' do
     let (:title) { 'cert=user' }
 
     it 'should fail' do
-      expect { should contain_concat__fragment('mcollective.actionpolicy..cert=user')
+      expect { should contain_concat__fragment('mcollective.actionpolicy.cert=user')
       }.to raise_error(Puppet::Error, /Wrong value for \$agent ''/)
     end
   end
@@ -33,7 +33,7 @@ describe 'mcollective::actionpolicy' do
     } }
 
     it 'should fail' do
-      expect { should contain_concat__fragment('mcollective.actionpolicy.foo bar.rule')
+      expect { should contain_concat__fragment('mcollective.actionpolicy.cert=user@foo')
       }.to raise_error(Puppet::Error, /Wrong value for \$agent 'foo bar'/)
     end
   end
@@ -42,7 +42,7 @@ describe 'mcollective::actionpolicy' do
     let (:title) { 'cert=user@bar' }
 
     it 'should fail' do
-      expect { should contain_concat__fragment('mcollective.actionpolicy.cert=user.bar')
+      expect { should contain_concat__fragment('mcollective.actionpolicy.cert=user@bar')
       }.to raise_error(Puppet::Error, /You must declare an mcollective::actionpolicy::base for agent 'bar'/)
     end
   end
@@ -53,11 +53,46 @@ describe 'mcollective::actionpolicy' do
     } }
 
     it 'should fail' do
-      expect { should contain_concat__fragment('mcollective.actionpolicy.rule.bar')
+      expect { should contain_concat__fragment('mcollective.actionpolicy.cert=user@foo')
       }.to raise_error(Puppet::Error, /\$auth must be either 'allow' or 'deny', got 'update'/)
     end
   end
 
+  context 'when actions is not an array' do
+    let (:params) { {
+      :actions => 'myaction'
+    } }
 
+    it 'should fail' do
+      expect { should contain_concat__fragment('mcollective.actionpolicy.cert=user@foo')
+      }.to raise_error(Puppet::Error, /"myaction" is not an Array/)
+    end
+  end
+
+  context 'when facts is not an array' do
+    let (:params) { {
+      :facts => 'myfact'
+    } }
+
+    it 'should fail' do
+      expect { should contain_concat__fragment('mcollective.actionpolicy.cert=user@foo')
+      }.to raise_error(Puppet::Error, /"myfact" is not an Array/)
+    end
+  end
+
+  context 'when classes is not an array' do
+    let (:params) { {
+      :classes => 'myclass'
+    } }
+
+    it 'should fail' do
+      expect { should contain_concat__fragment('mcollective.actionpolicy.cert=user@foo')
+      }.to raise_error(Puppet::Error, /"myclass" is not an Array/)
+    end
+  end
+
+  context 'when using defaults' do
+    it { should contain_concat__fragment('mcollective.actionpolicy.cert=user@foo') }
+  end
 
 end
