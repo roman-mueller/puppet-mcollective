@@ -39,4 +39,31 @@ describe 'mcollective::client::certificate' do
     end
   end
 
+  context 'when specifying key_source' do
+    let (:params) { {
+      :key_source => '/tmp/johndoe.pem'
+    } }
+
+    it { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem').with(
+      :ensure => 'present',
+      :owner  => 'root',
+      :group  => 'root',
+      :mode   => '0640',
+      :source => '/tmp/johndoe.pem'
+    ) }
+  end
+
+  context 'when specifying key_source_dir' do
+    let (:params) { {
+      :key_source_dir => '/tmp/keys'
+    } }
+
+    it { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem').with(
+      :ensure => 'present',
+      :owner  => 'root',
+      :group  => 'root',
+      :mode   => '0640',
+      :source => '/tmp/keys/johndoe.pem'
+    ) }
+  end
 end
