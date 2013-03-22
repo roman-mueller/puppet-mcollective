@@ -14,7 +14,6 @@
 #   ['key_source_dir'] - The directory where key files are stored.
 #                        If specified, overrides 'key_source'
 #                        with ${key_dir}/${name}.pem
-#   ['cert_dir']       - Where to deploy the certificates.
 #
 # Actions:
 # - Deploys an MCollective SSL certificate
@@ -29,16 +28,28 @@ define mcollective::client::certificate (
   $key_source = undef,
   $key_source_dir = undef,
   $ensure = 'present',
-  $cert_dir = '/etc/mcollective/ssl/clients',
 ) {
-  if (!$key_source and !$key_source_dir) {
+  if (!$key_source and !$key_source_dir) or ($key_source and $key_source_dir) {
     fail('You must pass either $key_source or $key_source_dir')
+  }
+
+  if defined(Class['mcollective::node']) {
+    $cert_dir = $mcollective::node::cert_dir
+  } else {
+    fail('You must declare the mcollective::node class before you can use mcollective::client::certificate')
   }
 
   $_key_source = $key_source_dir ? {
     undef   => $key_source,
     default => "${key_source_dir}/${name}.pem",
   }
+
+  # Validate parameters
+  validate_re($ensure, '^(present|absent)$',
+    "\$ensure must be either 'present' or 'absent', got '${ensure}'")
+  validate_re($cert_dir, '^/.*',
+    "\$cert_dir must be a valid path, got '${cert_dir}'")
+  validate_re($_key_source, '\S+', 'Invalid key source')
 
   file {
     "${cert_dir}/${name}.pem":
