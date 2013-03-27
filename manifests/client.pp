@@ -96,4 +96,6 @@ class mcollective::client (
     group   => 'root',
     source  => 'puppet:///modules/mcollective/bash_completion.sh',
   }
+
+  Class['mcollective::client'] -> Mcollective::Application <| |>
 }
