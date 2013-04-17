@@ -26,12 +26,14 @@ class mcollective::params {
     'Debian': {
       $client_require = Package['rubygems', 'ruby-stomp']
       $server_require = Package['rubygems', 'ruby-stomp']
+      $plugin_require = Package['rubygems', 'ruby-stomp']
       $libdir = '/usr/share/mcollective/plugins'
     }
 
     'RedHat': {
       $client_require = Package['rubygems', 'rubygem-stomp']
       $server_require = Package['rubygems', 'rubygem-stomp', 'rubygem-net-ping']
+      $plugin_require = Package['rubygems', 'rubygem-stomp']
       $libdir = '/usr/libexec/mcollective'
     }
 

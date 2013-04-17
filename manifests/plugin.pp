@@ -17,13 +17,16 @@ define mcollective::plugin (
   $ensure='present'
 ) {
 
+  include ::mcollective::params
+
   $package = $::osfamily ? {
     'Debian' => "mcollective-agent-${name}",
     'RedHat' => "mcollective-plugins-${name}",
   }
 
   package { $package:
-    ensure => $ensure,
-    notify => Exec['reload mcollective'],
+    ensure  => $ensure,
+    require => $mcollective::params::plugin_require,
+    notify  => Exec['reload mcollective'],
   }
 }
