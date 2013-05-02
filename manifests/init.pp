@@ -59,6 +59,8 @@
 #                           Defaults to '/etc/mcollective/ssl/clients'.
 #   ['policies_dir']      - Path to the policies directory.
 #                           Defaults to '/etc/mcollective/policies'.
+#   ['direct_addressing'] - Enable direct addressing.
+#                           Defaults to '0'.
 #
 # === Actions
 #
@@ -105,6 +107,7 @@ class mcollective (
   $rpcauth_enable_default = $mcollective::params::rpcauth_enable_default,
   $cert_dir = $mcollective::params::cert_dir,
   $policies_dir = $mcollective::params::policies_dir,
+  $direct_addressing = $mcollective::params::direct_addressing,
 ) inherits ::mcollective::params {
 
   if ($node) {

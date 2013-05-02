@@ -21,6 +21,7 @@ class mcollective::params {
   $policies_dir = '/etc/mcollective/policies'
   $node = true
   $client = false
+  $direct_addressing = 0
 
   case $::osfamily {
     'Debian': {
