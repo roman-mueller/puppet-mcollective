@@ -40,7 +40,7 @@
 #                           Defaults to 'rabbitmq'.
 #   ['puppetca_cadir']    - Path to the Puppet CA directory.
 #   ['direct_addressing'] - Enable direct addressing.
-#                           Defaults to false.
+#                           Defaults to '0'.
 #
 # === Actions
 #

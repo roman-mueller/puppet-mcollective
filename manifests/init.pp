@@ -60,7 +60,7 @@
 #   ['policies_dir']      - Path to the policies directory.
 #                           Defaults to '/etc/mcollective/policies'.
 #   ['direct_addressing'] - Enable direct addressing.
-#                           Defaults to false.
+#                           Defaults to '0'.
 #
 # === Actions
 #
