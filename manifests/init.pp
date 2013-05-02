@@ -1,4 +1,4 @@
-# Class: mcollective
+# == Class: mcollective
 #
 # This class provides a simple way to deploy MCollective nodes and clients.
 # It will install and configure the necessary packages.
@@ -8,7 +8,8 @@
 #
 # It supports PSK and SSL as authentication methods.
 #
-# Parameters:
+# === Parameters
+#
 #   ['node']              - Whether to install an MCollective node.
 #                           Defaults to true.
 #   ['client']            - Whether to install an MCollective client.
@@ -59,10 +60,12 @@
 #   ['policies_dir']      - Path to the policies directory.
 #                           Defaults to '/etc/mcollective/policies'.
 #
-# Actions:
+# === Actions
+#
 # - Deploys MCollective nodes and clients
 #
-# Sample Usage:
+# === Sample Usage
+#
 #   class { '::mcollective':
 #     broker_host       => 'rabbitmq.example.com',
 #     broker_port       => '61614',

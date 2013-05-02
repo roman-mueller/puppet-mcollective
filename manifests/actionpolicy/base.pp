@@ -1,4 +1,4 @@
-# Definition: mcollective::actionpolicy::base
+# == Definition: mcollective::actionpolicy::base
 #
 # Sets up a base action policy for an MCollective agent.
 #
@@ -7,19 +7,23 @@
 #
 # You should declare mcollective::node before using this.
 #
-# Parameters:
+# === Parameters
+#
 #   ['ensure']         - Whether the policy rule should be present or absent.
 #   ['default_policy'] - The default policy to apply.
 #                        Defaults to 'deny'.
 #
-# Actions:
+# === Actions
+#
 # - Deploys a base MCollective Action Policy rule for an agent
 #
-# Requires:
+# === Requires
+#
 # - `ripienaar/concat`
 # - `puppetlabs/stdlib`
 #
-# Sample Usage:
+# === Sample Usage
+#
 #   mcollective::actionpolicy::base { 'puppetd':
 #     ensure => present,
 #   }

@@ -1,4 +1,4 @@
-# Class: mcollective::client
+# == Class: mcollective::client
 #
 # This class provides a simple way to deploy an MCollective client.
 # It will install and configure the necessary packages.
@@ -8,7 +8,8 @@
 #
 # It supports PSK and SSL as authentication methods.
 #
-# Parameters:
+# === Parameters
+#
 #   ['broker_host']       - The middleware broker host to use.
 #   ['broker_port']       - The middleware broker port to use.
 #   ['broker_vhost']      - The middleware broker vhost to use.
@@ -39,10 +40,12 @@
 #                           Defaults to 'rabbitmq'.
 #   ['puppetca_cadir']    - Path to the Puppet CA directory.
 #
-# Actions:
+# === Actions
+#
 # - Deploys an MCollective client
 #
-# Sample Usage:
+# === Sample Usage
+#
 #   class { '::mcollective::client':
 #     broker_host       => 'rabbitmq.example.com',
 #     broker_port       => '61614',

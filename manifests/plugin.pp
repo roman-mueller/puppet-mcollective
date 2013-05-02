@@ -1,14 +1,17 @@
-# Definition: mcollective::plugin
+# == Definition: mcollective::plugin
 #
 # Sets up an MCollective plugin using packages.
 #
-# Parameters:
+# === Parameters
+#
 #   ['ensure']         - Whether the plugin should be present or absent.
 #
-# Actions:
+# === Actions
+#
 # - Installs an MCollective plugin using packages.
 #
-# Sample Usage:
+# === Sample Usage
+#
 #   mcollective::plugin { 'puppetca':
 #     ensure         => present,
 #   }

@@ -1,4 +1,4 @@
-# Class: mcollective::node
+# == Class: mcollective::node
 #
 # This class provides a simple way to deploy an MCollective node.
 # It will install and configure the necessary packages.
@@ -8,7 +8,8 @@
 #
 # It supports PSK and SSL as authentication methods.
 #
-# Parameters:
+# === Parameters
+#
 #   ['broker_host']       - The middleware broker host to use.
 #   ['broker_port']       - The middleware broker port to use.
 #   ['broker_vhost']      - The middleware broker vhost to use.
@@ -51,7 +52,8 @@
 #   ['policies_dir']      - Path to the policies directory.
 #                           Defaults to '/etc/mcollective/policies'.
 #
-# Actions:
+# === Actions
+#
 # - Deploys an MCollective node
 #
 # Sample Usage:
