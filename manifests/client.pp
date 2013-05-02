@@ -39,6 +39,8 @@
 #   ['connector']         - The connector to use. Either 'stomp' or 'rabbitmq'.
 #                           Defaults to 'rabbitmq'.
 #   ['puppetca_cadir']    - Path to the Puppet CA directory.
+#   ['direct_addressing'] - Enable direct addressing.
+#                           Defaults to false.
 #
 # === Actions
 #
@@ -76,6 +78,7 @@ class mcollective::client (
   $security_ssl_client_public = $mcollective::params::security_ssl_client_public,
   $connector = $mcollective::params::connector,
   $puppetca_cadir = $mcollective::params::puppetca_cadir,
+  $direct_addressing = $mcollective::params::direct_addressing,
 ) inherits ::mcollective::params {
 
   package { 'mcollective-client':
