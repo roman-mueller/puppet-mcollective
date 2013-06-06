@@ -110,6 +110,8 @@ class mcollective (
   $direct_addressing = $mcollective::params::direct_addressing,
 ) inherits ::mcollective::params {
 
+  include ::mcollective::directories
+
   if ($use_node) {
     Class['::mcollective'] ->
     class { '::mcollective::node': }
