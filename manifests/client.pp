@@ -62,24 +62,30 @@
 #   }
 #
 class mcollective::client (
-  $broker_host,
-  $broker_port,
-  $security_provider,
-  $broker_vhost = $mcollective::params::broker_vhost,
-  $broker_user = $mcollective::params::broker_user,
-  $broker_password = $mcollective::params::broker_password,
-  $broker_ssl = $mcollective::params::broker_ssl,
-  $broker_ssl_cert = $mcollective::params::broker_ssl_cert,
-  $broker_ssl_key = $mcollective::params::broker_ssl_key,
-  $broker_ssl_ca = $mcollective::params::broker_ssl_ca,
-  $security_secret = $mcollective::params::security_secret,
-  $security_ssl_server_public = $mcollective::params::security_ssl_server_public,
-  $security_ssl_client_private = $mcollective::params::security_ssl_client_private,
-  $security_ssl_client_public = $mcollective::params::security_ssl_client_public,
-  $connector = $mcollective::params::connector,
-  $puppetca_cadir = $mcollective::params::puppetca_cadir,
-  $direct_addressing = $mcollective::params::direct_addressing,
-) inherits ::mcollective::params {
+  $broker_host = $mcollective::broker_host,
+  $broker_port = $mcollective::broker_port,
+  $security_provider = $mcollective::security_provider,
+  $broker_vhost = $mcollective::broker_vhost,
+  $broker_user = $mcollective::broker_user,
+  $broker_password = $mcollective::broker_password,
+  $broker_ssl = $mcollective::broker_ssl,
+  $broker_ssl_cert = $mcollective::broker_ssl_cert,
+  $broker_ssl_key = $mcollective::broker_ssl_key,
+  $broker_ssl_ca = $mcollective::broker_ssl_ca,
+  $security_secret = $mcollective::security_secret,
+  $security_ssl_server_public = $mcollective::security_ssl_server_public,
+  $security_ssl_client_private = $mcollective::security_ssl_client_private,
+  $security_ssl_client_public = $mcollective::security_ssl_client_public,
+  $connector = $mcollective::connector,
+  $puppetca_cadir = $mcollective::puppetca_cadir,
+  $direct_addressing = $mcollective::direct_addressing,
+) {
+
+  if !defined(Class['::mcollective']) {
+    fail ('You must declare the mcollective class before the mcollective::client class')
+  }
+
+  include ::mcollective::params
 
   package { 'mcollective-client':
     ensure  => present,
@@ -87,6 +93,7 @@ class mcollective::client (
   }
 
   $mcollective_libdir = $mcollective::params::libdir
+  validate_absolute_path($mcollective_libdir)
 
   file { '/etc/mcollective/client.cfg':
     mode    => '0644',

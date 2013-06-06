@@ -19,8 +19,8 @@ class mcollective::params {
   $rpcauth_enable_default = 1
   $cert_dir = '/etc/mcollective/ssl/clients'
   $policies_dir = '/etc/mcollective/policies'
-  $node = true
-  $client = false
+  $use_node = true
+  $use_client = false
   $direct_addressing = 0
 
   case $::osfamily {
