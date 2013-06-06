@@ -85,30 +85,8 @@ class mcollective::client (
     fail ('You must declare the mcollective class before the mcollective::client class')
   }
 
-  include ::mcollective::params
-
-  package { 'mcollective-client':
-    ensure  => present,
-    require => $mcollective::params::client_require
-  }
-
-  $mcollective_libdir = $mcollective::params::libdir
-  validate_absolute_path($mcollective_libdir)
-
-  file { '/etc/mcollective/client.cfg':
-    mode    => '0644',
-    owner   => 'root',
-    group   => 'root',
-    content => template('mcollective/client.cfg.erb'),
-    require => Package['mcollective'],
-  }
-
-  file { '/etc/bash_completion.d/mco':
-    mode    => '0755',
-    owner   => 'root',
-    group   => 'root',
-    source  => 'puppet:///modules/mcollective/bash_completion.sh',
-  }
+  class { '::mcollective::client::packages': } ->
+  class { '::mcollective::client::files': }
 
   Class['mcollective::client'] -> Mcollective::Application <| |>
 }

@@ -28,12 +28,16 @@ define mcollective::application (
     fail('You must declare class mcollective::client before using mcollective::application')
   }
 
+  include ::mcollective::params
+  $libdir = $mcollective::params::libdir
+  validate_absolute_path($libdir)
+
   $filesrc = $source ? {
     ''      => "puppet:///modules/${module_name}/application/${name}.rb",
     default => $source,
   }
 
-  file {"${mcollective::client::mcollective_libdir}/mcollective/application/${name}.rb":
+  file {"${libdir}/mcollective/application/${name}.rb":
     ensure => $ensure,
     source => $filesrc,
     owner  => 'root',
