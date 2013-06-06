@@ -19,16 +19,16 @@ This module has a single access point class:
       broker_ssl        => false,
       security_provider => 'psk',
       security_secret   => 'P@S5w0rD',
-      node              => true,
-      client            => false,
+      use_node          => true,
+      use_client        => false,
     }
 
     class { '::mcollective':
       broker_host       => 'rabbitmq.example.com',
       broker_port       => '61614',
       security_provider => 'ssl',
-      node              => true,
-      client            => true,
+      use_node          => true,
+      use_client        => true,
     }
 
 ## Classes
@@ -39,35 +39,27 @@ This module provides two classes to configure MCollective nodes and clients.
 
 Installs and configures an MCollective node:
 
-    class { '::mcollective::node':
+    class { '::mcollective':
       broker_host       => 'rabbitmq.example.com',
       broker_port       => '61614',
       security_provider => 'psk',
       security_secret   => 'P@S5w0rD',
+      use_node          => false,
     }
-
-    class { '::mcollective::node':
-      broker_host                 => 'rabbitmq.example.com',
-      broker_port                 => '61614',
-      security_provider           => 'ssl',
-    }
+    include ::mcollective::node
 
 ### mcollective::client
 
 Installs and configures an MCollective client:
 
-    class { '::mcollective::client':
+    class { '::mcollective':
       broker_host       => 'rabbitmq.example.com',
       broker_port       => '61614',
       security_provider => 'psk',
       security_secret   => 'P@S5w0rD',
+      use_node          => false,
     }
- 
-    class { '::mcollective::client':
-      broker_host       => 'rabbitmq.example.com',
-      broker_port       => '61614',
-      security_provider => 'ssl',
-    }
+    include ::mcollective::client
 
 ## Definitions
 

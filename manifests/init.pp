@@ -10,9 +10,9 @@
 #
 # === Parameters
 #
-#   ['node']              - Whether to install an MCollective node.
+#   ['use_node']          - Whether to install an MCollective node.
 #                           Defaults to true.
-#   ['client']            - Whether to install an MCollective client.
+#   ['use_client']        - Whether to install an MCollective client.
 #                           Defaults to false.
 #   ['broker_host']       - The middleware broker host to use.
 #   ['broker_port']       - The middleware broker port to use.
@@ -85,8 +85,8 @@ class mcollective (
   $broker_host,
   $broker_port,
   $security_provider,
-  $node = $mcollective::params::node,
-  $client = $mcollective::params::client,
+  $use_node = $mcollective::params::use_node,
+  $use_client = $mcollective::params::use_client,
   $broker_vhost = $mcollective::params::broker_vhost,
   $broker_user = $mcollective::params::broker_user,
   $broker_password = $mcollective::params::broker_password,
@@ -110,50 +110,13 @@ class mcollective (
   $direct_addressing = $mcollective::params::direct_addressing,
 ) inherits ::mcollective::params {
 
-  if ($node) {
-    class { '::mcollective::node':
-      broker_host                => $broker_host,
-      broker_port                => $broker_port,
-      security_provider          => $security_provider,
-      broker_vhost               => $broker_vhost,
-      broker_user                => $broker_user,
-      broker_password            => $broker_password,
-      broker_ssl                 => $broker_ssl,
-      broker_ssl_cert            => $broker_ssl_cert,
-      broker_ssl_key             => $broker_ssl_key,
-      broker_ssl_ca              => $broker_ssl_ca,
-      security_secret            => $security_secret,
-      security_ssl_private       => $security_ssl_server_private,
-      security_ssl_public        => $security_ssl_server_public,
-      connector                  => $connector,
-      puppetca_cadir             => $puppetca_cadir,
-      rpcauthorization           => $rpcauthorization,
-      rpcauthprovider            => $rpcauthprovider,
-      rpcauth_allow_unconfigured => $rpcauth_allow_unconfigured,
-      rpcauth_enable_default     => $rpcauth_enable_default,
-      cert_dir                   => $cert_dir,
-      policies_dir               => $policies_dir,
-    }
+  if ($use_node) {
+    Class['::mcollective'] ->
+    class { '::mcollective::node': }
   }
 
-  if ($client) {
-    class { '::mcollective::client':
-      broker_host                 => $broker_host,
-      broker_port                 => $broker_port,
-      security_provider           => $security_provider,
-      broker_vhost                => $broker_vhost,
-      broker_user                 => $broker_user,
-      broker_password             => $broker_password,
-      broker_ssl                  => $broker_ssl,
-      broker_ssl_cert             => $broker_ssl_cert,
-      broker_ssl_key              => $broker_ssl_key,
-      broker_ssl_ca               => $broker_ssl_ca,
-      security_secret             => $security_secret,
-      security_ssl_server_public  => $security_ssl_server_public,
-      security_ssl_client_private => $security_ssl_client_private,
-      security_ssl_client_public  => $security_ssl_client_public,
-      connector                   => $connector,
-      puppetca_cadir              => $puppetca_cadir,
-    }
+  if ($use_client) {
+    Class['::mcollective'] ->
+    class { '::mcollective::client': }
   }
 }

@@ -73,37 +73,41 @@
 #   }
 #
 class mcollective::node (
-  $broker_host,
-  $broker_port,
-  $security_provider,
-  $broker_vhost = $mcollective::params::broker_vhost,
-  $broker_user = $mcollective::params::broker_user,
-  $broker_password = $mcollective::params::broker_password,
-  $broker_ssl = $mcollective::params::broker_ssl,
-  $broker_ssl_cert = $mcollective::params::broker_ssl_cert,
-  $broker_ssl_key = $mcollective::params::broker_ssl_key,
-  $broker_ssl_ca = $mcollective::params::broker_ssl_ca,
-  $security_secret = $mcollective::params::security_secret,
-  $security_ssl_private = $mcollective::params::security_ssl_server_private,
-  $security_ssl_public = $mcollective::params::security_ssl_server_public,
-  $connector = $mcollective::params::connector,
-  $puppetca_cadir = $mcollective::params::puppetca_cadir,
-  $rpcauthorization = $mcollective::params::rpcauthorization,
-  $rpcauthprovider = $mcollective::params::rpcauthprovider,
-  $rpcauth_allow_unconfigured = $mcollective::params::rpcauth_allow_unconfigured,
-  $rpcauth_enable_default = $mcollective::params::rpcauth_enable_default,
-  $cert_dir = $mcollective::params::cert_dir,
-  $policies_dir = $mcollective::params::policies_dir,
-  $direct_addressing = $mcollective::params::direct_addressing,
-) inherits ::mcollective::params {
+  $broker_host = $mcollective::broker_host,
+  $broker_port = $mcollective::broker_port,
+  $security_provider = $mcollective::security_provider,
+  $broker_vhost = $mcollective::broker_vhost,
+  $broker_user = $mcollective::broker_user,
+  $broker_password = $mcollective::broker_password,
+  $broker_ssl = $mcollective::broker_ssl,
+  $broker_ssl_cert = $mcollective::broker_ssl_cert,
+  $broker_ssl_key = $mcollective::broker_ssl_key,
+  $broker_ssl_ca = $mcollective::broker_ssl_ca,
+  $security_secret = $mcollective::security_secret,
+  $security_ssl_private = $mcollective::security_ssl_server_private,
+  $security_ssl_public = $mcollective::security_ssl_server_public,
+  $connector = $mcollective::connector,
+  $puppetca_cadir = $mcollective::puppetca_cadir,
+  $rpcauthorization = $mcollective::rpcauthorization,
+  $rpcauthprovider = $mcollective::rpcauthprovider,
+  $rpcauth_allow_unconfigured = $mcollective::rpcauth_allow_unconfigured,
+  $rpcauth_enable_default = $mcollective::rpcauth_enable_default,
+  $cert_dir = $mcollective::cert_dir,
+  $policies_dir = $mcollective::policies_dir,
+  $direct_addressing = $mcollective::direct_addressing,
+) {
 
-  include ruby::gems
-
-  # Recent Upstart requires daemonize to be set to 0
-  # warning: do not name this variable $daemonize!
-  $mcollective_daemonize = $::operatingsystem ? {
-    default => 1
+  if !defined(Class['::mcollective']) {
+    fail ('You must declare the mcollective class before the mcollective::node class')
   }
+
+  include ::mcollective::params
+  include ::ruby::gems
+
+  $mcollective_daemonize = 1
+
+  validate_absolute_path($cert_dir)
+  validate_absolute_path($policies_dir)
 
   file { [$cert_dir, $policies_dir]:
     ensure  => directory,
@@ -116,6 +120,7 @@ class mcollective::node (
   }
 
   $mcollective_libdir = $mcollective::params::libdir
+  validate_absolute_path($mcollective_libdir)
 
   case $::osfamily {
 
