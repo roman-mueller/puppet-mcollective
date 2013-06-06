@@ -10,6 +10,10 @@ class mcollective::node::files {
   validate_absolute_path($cert_dir)
   validate_absolute_path($policies_dir)
 
+  # For the templates
+  $libdir = $mcollective::params::libdir
+  validate_absolute_path($libdir)
+
   file { [$cert_dir, $policies_dir]:
     ensure  => directory,
     owner   => 'root',

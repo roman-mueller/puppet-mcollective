@@ -4,6 +4,10 @@
 class mcollective::client::files {
   include ::mcollective::params
 
+  # For the templates
+  $libdir = $mcollective::params::libdir
+  validate_absolute_path($libdir)
+
   file { '/etc/mcollective/client.cfg':
     mode    => '0644',
     owner   => 'root',
