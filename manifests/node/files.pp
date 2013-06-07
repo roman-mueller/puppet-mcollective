@@ -70,4 +70,19 @@ class mcollective::node::files {
                         # cause unnecessary template writes
     content  => template('mcollective/facts.yaml.erb'),
   }
+
+  # action policy plugin, while it's not packaged yet
+  file { "${libdir}/mcollective/util":
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+  }
+  file { "${libdir}/mcollective/util/actionpolicy.rb":
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => "puppet:///${module_name}/actionpolicy.rb",
+  }
 }
