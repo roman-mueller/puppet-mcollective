@@ -41,6 +41,8 @@
 #   ['puppetca_cadir']    - Path to the Puppet CA directory.
 #   ['direct_addressing'] - Enable direct addressing.
 #                           Defaults to '0'.
+#   ['ssl_source_dir']    - Where to get certificates from.
+#                           Defaults to undef.
 #
 # === Actions
 #
@@ -79,6 +81,7 @@ class mcollective::client (
   $connector = $mcollective::connector,
   $puppetca_cadir = $mcollective::puppetca_cadir,
   $direct_addressing = $mcollective::direct_addressing,
+  $ssl_source_dir = $mcollective::ssl_source_dir,
 ) {
 
   if !defined(Class['::mcollective']) {

@@ -61,6 +61,8 @@
 #                           Defaults to '/etc/mcollective/policies'.
 #   ['direct_addressing'] - Enable direct addressing.
 #                           Defaults to '0'.
+#   ['ssl_source_dir']    - Where to get certificates from.
+#                           Defaults to undef.
 #
 # === Actions
 #
@@ -108,6 +110,7 @@ class mcollective (
   $cert_dir = $mcollective::params::cert_dir,
   $policies_dir = $mcollective::params::policies_dir,
   $direct_addressing = $mcollective::params::direct_addressing,
+  $ssl_source_dir = undef,
 ) inherits ::mcollective::params {
 
   include ::mcollective::directories

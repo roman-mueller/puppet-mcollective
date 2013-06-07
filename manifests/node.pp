@@ -53,6 +53,8 @@
 #                           Defaults to '/etc/mcollective/policies'.
 #   ['direct_addressing'] - Enable direct addressing.
 #                           Defaults to '0'.
+#   ['ssl_source_dir']    - Where to get certificates from.
+#                           Defaults to undef.
 #
 # === Actions
 #
@@ -95,6 +97,7 @@ class mcollective::node (
   $cert_dir = $mcollective::cert_dir,
   $policies_dir = $mcollective::policies_dir,
   $direct_addressing = $mcollective::direct_addressing,
+  $ssl_source_dir = $mcollective::ssl_source_dir,
 ) {
 
   if !defined(Class['::mcollective']) {

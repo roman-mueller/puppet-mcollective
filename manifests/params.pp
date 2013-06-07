@@ -3,8 +3,8 @@ class mcollective::params {
   $broker_user = 'guest'
   $broker_password = 'guest'
   $broker_ssl = true
-  $broker_ssl_cert = "/var/lib/puppet/ssl/certs/${::fqdn}.pem"
-  $broker_ssl_key = "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem"
+  $broker_ssl_cert = '/etc/mcollective/ssl/mco-client.crt'
+  $broker_ssl_key = '/etc/mcollective/ssl/mco-client.key'
   $broker_ssl_ca = '/var/lib/puppet/ssl/certs/ca.pem'
   $security_secret = ''
   $security_ssl_server_private = '/etc/mcollective/ssl/server-private.pem'

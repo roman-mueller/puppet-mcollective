@@ -43,4 +43,32 @@ class mcollective::node::files {
                         # cause unnecessary template writes
     content  => template('mcollective/facts.yaml.erb'),
   }
+
+  $security_provider = $mcollective::node::security_provider
+  validate_string($security_provider)
+  $ssl_source_dir = $mcollective::node::ssl_source_dir
+  validate_string($ssl_source_dir)
+
+  if $security_provider == 'ssl' and $ssl_source_dir {
+    $ssl_server_private = $mcollective::node::ssl_server_private
+    validate_absolute_path($ssl_server_private)
+    $ssl_server_public = $mcollective::node::ssl_server_public
+    validate_absolute_path($ssl_server_public)
+
+    file {
+      $ssl_server_private:
+        ensure => present,
+        owner  => root,
+        group  => root,
+        mode   => '0600',
+        source => "${ssl_source_dir}/mco-server.key";
+
+      $ssl_server_public:
+        ensure => present,
+        owner  => root,
+        group  => root,
+        mode   => '0644',
+        source => "${ssl_source_dir}/mco-server.crt";
+    }
+  }
 }

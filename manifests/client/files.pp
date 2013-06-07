@@ -21,4 +21,49 @@ class mcollective::client::files {
     group   => 'root',
     source  => 'puppet:///modules/mcollective/bash_completion.sh',
   }
+
+  $security_provider = $mcollective::client::security_provider
+  validate_string($security_provider)
+  $ssl_source_dir = $mcollective::client::ssl_source_dir
+  validate_string($ssl_source_dir)
+
+  if $security_provider == 'ssl' {
+
+    $broker_ssl_key = $mcollective::client::broker_ssl_key
+    validate_absolute_path($broker_ssl_key)
+    $key_source = $ssl_source_dir ? {
+      undef   => "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem",
+      default => "${ssl_source_dir}/mco-client.key",
+    }
+
+    $broker_ssl_cert = $mcollective::client::broker_ssl_cert
+    validate_absolute_path($broker_ssl_cert)
+    $cert_source = $ssl_source_dir ? {
+      undef   => "/var/lib/puppet/ssl/certs/${::fqdn}.pem",
+      default => "${ssl_source_dir}/mco-client.crt",
+    }
+
+    $broker_ssl_ca = $mcollective::client::broker_ssl_ca
+    validate_absolute_path($broker_ssl_ca)
+
+    file {
+      $broker_ssl_key:
+        source => $key_source,
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644';
+
+      $broker_ssl_cert:
+        source => $cert_source,
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644';
+
+      $broker_ssl_ca:
+        source => '/var/lib/puppet/ssl/certs/ca.pem',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644';
+    }
+  }
 }
