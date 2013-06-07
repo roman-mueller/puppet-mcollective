@@ -5,7 +5,7 @@ class mcollective::params {
   $broker_ssl = true
   $broker_ssl_cert = '/etc/mcollective/ssl/mco-client.crt'
   $broker_ssl_key = '/etc/mcollective/ssl/mco-client.key'
-  $broker_ssl_ca = '/var/lib/puppet/ssl/certs/ca.pem'
+  $broker_ssl_ca = '/etc/mcollective/ssl/ca.pem'
   $security_secret = ''
   $security_ssl_server_private = '/etc/mcollective/ssl/server-private.pem'
   $security_ssl_server_public = '/etc/mcollective/ssl/server-public.pem'
