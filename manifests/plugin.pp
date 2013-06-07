@@ -30,6 +30,5 @@ define mcollective::plugin (
   package { $package:
     ensure  => $ensure,
     require => $mcollective::params::plugin_require,
-    notify  => Exec['reload mcollective'],
   }
 }

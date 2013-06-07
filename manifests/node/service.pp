@@ -7,9 +7,4 @@ class mcollective::node::service {
     hasstatus => true,
     enable    => true,
   }
-
-  exec { 'reload mcollective':
-    command     => 'pkill -USR1 -f "ruby.*mcollectived"',
-    refreshonly => true,
-  }
 }
