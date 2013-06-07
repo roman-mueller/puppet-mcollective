@@ -39,6 +39,8 @@
 #   ['connector']         - The connector to use. Either 'stomp' or 'rabbitmq'.
 #                           Defaults to 'rabbitmq'.
 #   ['puppetca_cadir']    - Path to the Puppet CA directory.
+#   ['cert_dir']          - Path to the client certificates directory.
+#                           Defaults to '/etc/mcollective/ssl/clients'.
 #   ['direct_addressing'] - Enable direct addressing.
 #                           Defaults to '0'.
 #   ['ssl_source_dir']    - Where to get certificates from.
@@ -80,6 +82,7 @@ class mcollective::client (
   $security_ssl_client_public = $mcollective::security_ssl_client_public,
   $connector = $mcollective::connector,
   $puppetca_cadir = $mcollective::puppetca_cadir,
+  $cert_dir = $mcollective::cert_dir,
   $direct_addressing = $mcollective::direct_addressing,
   $ssl_source_dir = $mcollective::ssl_source_dir,
 ) {

@@ -4,40 +4,40 @@ collectives = mcollective
 libdir = <%= @libdir %>
 logfile = /dev/null
 loglevel = info
-direct_addressing = <%= @direct_addressing %>
+direct_addressing = <%= scope.lookupvar('mcollective::client::direct_addressing') %>
 
 # Plugins
 securityprovider = <%= @security_provider %>
 <% if @security_provider == 'psk' %>
-plugin.psk = <%= @security_secret %>
+plugin.psk = <%= scope.lookupvar('mcollective::client::security_secret') %>
 <% end %>
 <% if @security_provider == 'ssl' -%>
-plugin.ssl_server_public = <%= @security_ssl_server_public %>
-<% if @security_ssl_client_private -%>
-plugin.ssl_client_private = <%= @security_ssl_client_private %>
+plugin.ssl_server_public = <%= scope.lookupvar('mcollective::client::security_ssl_server_public') %>
+<% if scope.lookupvar('mcollective::client::security_ssl_client_private') -%>
+plugin.ssl_client_private = <%= scope.lookupvar('mcollective::client::security_ssl_client_private') %>
 <% end -%>
-<% if @security_ssl_client_public -%>
-plugin.ssl_client_public = <%= @security_ssl_client_public %>
+<% if scope.lookupvar('mcollective::client::security_ssl_client_public') -%>
+plugin.ssl_client_public = <%= scope.lookupvar('mcollective::client::security_ssl_client_public') %>
 <% end -%>
-plugin.ssl_client_cert_dir = /etc/mcollective/ssl/clients/
+plugin.ssl_client_cert_dir = <%= scope.lookupvar('mcollective::client::cert_dir') %>
 <% end %>
 
-connector = <%= @connector %>
-<% if @connector == 'rabbitmq' %>
-plugin.rabbitmq.vhost = <%= @broker_vhost %>
+connector = <%= scope.lookupvar('mcollective::client::connector') %>
+<% if scope.lookupvar('mcollective::client::connector') == 'rabbitmq' %>
+plugin.rabbitmq.vhost = <%= scope.lookupvar('mcollective::client::broker_vhost') %>
 <% end %>
-plugin.<%= @connector %>.pool.size = 1
-plugin.<%= @connector %>.pool.1.host = <%= @broker_host %>
-plugin.<%= @connector %>.pool.1.port = <%= @broker_port %>
-<% if @broker_user and @broker_user != '' %>
-plugin.<%= @connector %>.pool.1.user = <%= @broker_user %>
-plugin.<%= @connector %>.pool.1.password = <%= @broker_password %>
+plugin.<%= scope.lookupvar('mcollective::client::connector') %>.pool.size = 1
+plugin.<%= scope.lookupvar('mcollective::client::connector') %>.pool.1.host = <%= scope.lookupvar('mcollective::client::broker_host') %>
+plugin.<%= scope.lookupvar('mcollective::client::connector') %>.pool.1.port = <%= scope.lookupvar('mcollective::client::broker_port') %>
+<% if scope.lookupvar('mcollective::client::broker_user') and scope.lookupvar('mcollective::client::broker_user') != '' %>
+plugin.<%= scope.lookupvar('mcollective::client::connector') %>.pool.1.user = <%= scope.lookupvar('mcollective::client::broker_user') %>
+plugin.<%= scope.lookupvar('mcollective::client::connector') %>.pool.1.password = <%= scope.lookupvar('mcollective::client::broker_password') %>
 <% end %>
-plugin.<%= @connector %>.pool.1.ssl = <%= @broker_ssl %>
-<% if @broker_ssl %>
-plugin.<%= @connector %>.pool.1.ssl.cert = <%= @broker_ssl_cert %>
-plugin.<%= @connector %>.pool.1.ssl.key = <%= @broker_ssl_key %>
-plugin.<%= @connector %>.pool.1.ssl.ca = <%= @broker_ssl_ca %>
+plugin.<%= scope.lookupvar('mcollective::client::connector') %>.pool.1.ssl = <%= scope.lookupvar('mcollective::client::broker_ssl') %>
+<% if scope.lookupvar('mcollective::client::broker_ssl') %>
+plugin.<%= scope.lookupvar('mcollective::client::connector') %>.pool.1.ssl.cert = <%= @broker_ssl_cert %>
+plugin.<%= scope.lookupvar('mcollective::client::connector') %>.pool.1.ssl.key = <%= @broker_ssl_key %>
+plugin.<%= scope.lookupvar('mcollective::client::connector') %>.pool.1.ssl.ca = <%= @broker_ssl_ca %>
 <% end %>
 
 # Facts
