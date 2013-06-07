@@ -50,9 +50,9 @@ class mcollective::node::files {
   validate_string($ssl_source_dir)
 
   if $security_provider == 'ssl' and $ssl_source_dir {
-    $ssl_server_private = $mcollective::node::ssl_server_private
+    $ssl_server_private = $mcollective::node::security_ssl_private
     validate_absolute_path($ssl_server_private)
-    $ssl_server_public = $mcollective::node::ssl_server_public
+    $ssl_server_public = $mcollective::node::security_ssl_public
     validate_absolute_path($ssl_server_public)
 
     file {
