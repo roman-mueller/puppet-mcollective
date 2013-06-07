@@ -15,7 +15,7 @@ plugin.psk = <%= scope.lookupvar('mcollective::node::security_secret') %>
 <% if @security_provider == 'ssl' %>
 plugin.ssl_server_private = <%= @security_ssl_private %>
 plugin.ssl_server_public = <%= @security_ssl_public %>
-plugin.ssl_client_cert_dir = /etc/mcollective/ssl/clients/
+plugin.ssl_client_cert_dir = <%= scope.lookupvar('mcollective::node::cert_dir') %>
 <% end %>
 
 connector = <%= scope.lookupvar('mcollective::node::connector') %>
