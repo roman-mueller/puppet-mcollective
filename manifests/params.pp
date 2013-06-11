@@ -11,6 +11,13 @@ class mcollective::params {
   $security_ssl_server_public = '/etc/mcollective/ssl/server-public.pem'
   $security_ssl_client_private = false
   $security_ssl_client_public = false
+  $security_aes_server_private = '/etc/mcollective/ssl/server-private.pem'
+  $security_aes_server_public = '/etc/mcollective/ssl/server-public.pem'
+  $security_aes_client_private = false
+  $security_aes_client_public = false
+  $security_aes_send_pubkey = 0
+  $security_aes_learn_pubkeys = 0
+  $security_aes_enforce_ttl = 1
   $connector = 'rabbitmq'
   $puppetca_cadir = '/srv/puppetca/ca/'
   $rpcauthorization = false
