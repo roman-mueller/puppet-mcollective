@@ -19,7 +19,7 @@
 #                           ommited from the configuration file
 #                           (useful if you want to force using
 #                           environment variables instead).
-#                           Setting broker_user to undef will
+#                           Setting broker_user to false will
 #                           avoid setting it in client.cfg
 #                           and export STOMP_USER per shell user.
 #   ['broker_password']   - The middleware broker password to use.

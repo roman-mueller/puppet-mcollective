@@ -74,7 +74,7 @@ class mcollective::client::files {
       mode    => '0755',
       content => inline_template(
 'if [ $(id -nu) != "root" ]; then
-<%- if @broker_user -%>
+<%- unless @broker_user or @broker_user.nil? -%>
   export STOMP_USER="$USER"
 <%- end -%>
   export MCOLLECTIVE_SSL_PRIVATE="$HOME/.mc/$USER-private.pem"
