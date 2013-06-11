@@ -19,6 +19,9 @@
 #                           ommited from the configuration file
 #                           (useful if you want to force using
 #                           environment variables instead).
+#                           Setting broker_user to undef will
+#                           avoid setting it in client.cfg
+#                           and export STOMP_USER per shell user.
 #   ['broker_password']   - The middleware broker password to use.
 #   ['broker_ssl']        - Whether to use stomp over SSL
 #   ['broker_ssl_cert']   - If using SSL, the path to the SSL public key.
