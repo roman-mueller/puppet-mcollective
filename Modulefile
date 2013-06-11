@@ -1,5 +1,5 @@
 name         'camptocamp-mcollective'
-version      '0.4.2'
+version      '0.5.0'
 dependency   'camptocamp/ruby', '=> 0.0.1'
 dependency   'puppetlabs/stdlib', '=> 3.2.x'
 dependency   'ripienaar/concat', '>= 0.2.x'
