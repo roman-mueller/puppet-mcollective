@@ -34,7 +34,8 @@
 #                              private key (shared).
 #   ['security_ssl_public']  - If SSL is used, the path to the SSL
 #                              public key (shared).
-#   ['connector']         - The connector to use. Either 'stomp' or 'rabbitmq'.
+#   ['connector']         - The connector to use. Either 'stomp', 'activemq'
+#                           or 'rabbitmq'.
 #                           Defaults to 'rabbitmq'.
 #   ['puppetca_cadir']    - Path to the Puppet CA directory.
 #   ['rpcauthorization']  - Whether to use RPC authorization.

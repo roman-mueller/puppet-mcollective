@@ -39,7 +39,8 @@
 #                                     private client key.
 #   ['security_ssl_client_public']  - If SSL is used, the path to the SSL
 #                                     public client key.
-#   ['connector']         - The connector to use. Either 'stomp' or 'rabbitmq'.
+#   ['connector']         - The connector to use. Either 'stomp', 'activemq'
+#                           or 'rabbitmq'.
 #                           Defaults to 'rabbitmq'.
 #   ['puppetca_cadir']    - Path to the Puppet CA directory.
 #   ['cert_dir']          - Path to the client certificates directory.
