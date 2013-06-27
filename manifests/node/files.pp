@@ -83,6 +83,6 @@ class mcollective::node::files {
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => "puppet:///${module_name}/actionpolicy.rb",
+    source => "puppet:///modules/${module_name}/actionpolicy.rb",
   }
 }
