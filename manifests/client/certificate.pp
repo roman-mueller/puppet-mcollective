@@ -24,7 +24,7 @@
 #
 #   mcollective::client::certificate { 'foo':
 #     ensure  => present,
-#     key_source_dir => 'puppet:///module_name/path/to/dir/',
+#     key_source_dir => 'puppet:///modules/module_name/path/to/dir/',
 #   }
 #
 define mcollective::client::certificate (
