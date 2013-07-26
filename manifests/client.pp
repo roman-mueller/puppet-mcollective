@@ -39,6 +39,15 @@
 #                                     private client key.
 #   ['security_ssl_client_public']  - If SSL is used, the path to the SSL
 #                                     public client key.
+#   ['security_aes_client_private'] - If AES is used, the path to the AES
+#                                     private server key (shared).
+#   ['security_aes_client_public']  - If AES is used, the path to the AES
+#                                     public server key (shared).
+#   ['security_aes_send_pubkey']    - If AES is used, whether to send
+#                                     the AES public key.
+#   ['security_aes_learn_pubkeys']  - If AES is used, whether to learn
+#                                     the AES public keys.
+#   ['security_aes_enforce_ttl']    - If AES is used, whether to enforce TTL.
 #   ['connector']         - The connector to use. Either 'stomp', 'activemq'
 #                           or 'rabbitmq'.
 #                           Defaults to 'rabbitmq'.
@@ -84,6 +93,10 @@ class mcollective::client (
   $security_ssl_server_public = $mcollective::security_ssl_server_public,
   $security_ssl_client_private = $mcollective::security_ssl_client_private,
   $security_ssl_client_public = $mcollective::security_ssl_client_public,
+  $security_aes_client_private = $mcollective::security_aes_client_private,
+  $security_aes_client_public = $mcollective::security_aes_client_public,
+  $security_aes_send_pubkey = $mcollective::security_aes_send_pubkey,
+  $security_aes_learn_pubkeys = $mcollective::security_aes_learn_pubkeys,
   $connector = $mcollective::connector,
   $puppetca_cadir = $mcollective::puppetca_cadir,
   $cert_dir = $mcollective::cert_dir,

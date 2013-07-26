@@ -42,6 +42,19 @@
 #                                     private client key.
 #   ['security_ssl_client_public']  - If SSL is used, the path to the SSL
 #                                     public client key.
+#   ['security_aes_server_private'] - If AES is used, the path to the AES
+#                                     private server key (shared).
+#   ['security_aes_server_public']  - If AES is used, the path to the AES
+#                                     public server key (shared).
+#   ['security_aes_client_private'] - If AES is used, the path to the AES
+#                                     private client key.
+#   ['security_aes_client_public']  - If AES is used, the path to the AES
+#                                     public client key.
+#   ['security_aes_send_pubkey']    - If AES is used, whether to send
+#                                     the AES public key.
+#   ['security_aes_learn_pubkeys']  - If AES is used, whether to learn
+#                                     the AES public keys.
+#   ['security_aes_enforce_ttl']    - If AES is used, whether to enforce TTL.
 #   ['connector']         - The connector to use. Either 'stomp', 'activemq'
 #                           or 'rabbitmq'.
 #                           Defaults to 'rabbitmq'.
@@ -102,6 +115,13 @@ class mcollective (
   $security_ssl_server_public = $mcollective::params::security_ssl_server_public,
   $security_ssl_client_private = $mcollective::params::security_ssl_client_private,
   $security_ssl_client_public = $mcollective::params::security_ssl_client_public,
+  $security_aes_server_private = $mcollective::params::security_aes_server_private,
+  $security_aes_server_public = $mcollective::params::security_aes_server_public,
+  $security_aes_client_private = $mcollective::params::security_aes_client_private,
+  $security_aes_client_public = $mcollective::params::security_aes_client_public,
+  $security_aes_send_pubkey = $mcollective::params::security_aes_send_pubkey,
+  $security_aes_learn_pubkeys = $mcollective::params::security_aes_learn_pubkeys,
+  $security_aes_enforce_ttl = $mcollective::params::security_aes_enforce_ttl,
   $connector = $mcollective::params::connector,
   $puppetca_cadir = $mcollective::params::puppetca_cadir,
   $rpcauthorization = $mcollective::params::rpcauthorization,
