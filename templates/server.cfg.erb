@@ -36,7 +36,7 @@ plugin.<%= scope.lookupvar('mcollective::node::connector') %>.pool.1.port = <%= 
 plugin.<%= scope.lookupvar('mcollective::node::connector') %>.pool.1.user = <%= scope.lookupvar('mcollective::node::broker_user') %>
 plugin.<%= scope.lookupvar('mcollective::node::connector') %>.pool.1.password = <%= scope.lookupvar('mcollective::node::broker_password') %>
 plugin.<%= scope.lookupvar('mcollective::node::connector') %>.pool.1.ssl = <%= scope.lookupvar('mcollective::node::broker_ssl') %>
-<% if scope.lookupvar('mcollective::node::mcollective::node::broker_ssl') %>
+<% if scope.lookupvar('mcollective::node::broker_ssl') %>
 plugin.<%= scope.lookupvar('mcollective::node::connector') %>.pool.1.ssl.cert = <%= scope.lookupvar('mcollective::node::broker_ssl_cert') %>
 plugin.<%= scope.lookupvar('mcollective::node::connector') %>.pool.1.ssl.key = <%= scope.lookupvar('mcollective::node::broker_ssl_key') %>
 plugin.<%= scope.lookupvar('mcollective::node::connector') %>.pool.1.ssl.ca = <%= scope.lookupvar('mcollective::node::broker_ssl_ca') %>
