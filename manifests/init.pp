@@ -131,6 +131,9 @@ class mcollective (
   $cert_dir = $mcollective::params::cert_dir,
   $policies_dir = $mcollective::params::policies_dir,
   $direct_addressing = $mcollective::params::direct_addressing,
+  $registration = $mcollective::params::registration,
+  $registration_collective = $mcollective::params::registration_collective,
+  $registerinterval = undef,
   $ssl_source_dir = undef,
 ) inherits ::mcollective::params {
 

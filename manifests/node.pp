@@ -113,6 +113,9 @@ class mcollective::node (
   $policies_dir = $mcollective::policies_dir,
   $direct_addressing = $mcollective::direct_addressing,
   $ssl_source_dir = $mcollective::ssl_source_dir,
+  $registration = $mcollective::registration,
+  $registration_collective = $mcollective::registration_collective,
+  $registerinterval = $mcollective::registerinterval,
 ) {
 
   if !defined(Class['::mcollective']) {
