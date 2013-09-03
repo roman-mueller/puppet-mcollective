@@ -30,7 +30,7 @@ class mcollective::params {
   $use_client = false
   $direct_addressing = 0
   $registration = 'Agentlist'
-  $registration_collective = 'registration'
+  $registerinterval = 300
 
   case $::osfamily {
     'Debian': {

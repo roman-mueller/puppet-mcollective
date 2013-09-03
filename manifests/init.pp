@@ -75,6 +75,12 @@
 #                           Defaults to '/etc/mcollective/policies'.
 #   ['direct_addressing'] - Enable direct addressing.
 #                           Defaults to '0'.
+#   ['registration']      - The registration plugin to use
+#                           Defaults to 'AgentList.
+#   ['registerinterval']  - Registration interval
+#                           Defaults to '300'.
+#   ['registration_collective']    - The registration collective to use
+#                                    Defaults to undef.
 #   ['ssl_source_dir']    - Where to get certificates from.
 #                           Defaults to undef.
 #
@@ -132,8 +138,8 @@ class mcollective (
   $policies_dir = $mcollective::params::policies_dir,
   $direct_addressing = $mcollective::params::direct_addressing,
   $registration = $mcollective::params::registration,
-  $registration_collective = $mcollective::params::registration_collective,
-  $registerinterval = undef,
+  $registerinterval = $mcollective::params::registerinterval,
+  $registration_collective = undef,
   $ssl_source_dir = undef,
 ) inherits ::mcollective::params {
 
