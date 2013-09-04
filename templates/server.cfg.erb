@@ -63,7 +63,7 @@ classesfile = /var/lib/puppet/state/classes.txt
 # Registration
 registerinterval = <%= scope.lookupvar('mcollective::node::registerinterval') %>
 registration = <%= scope.lookupvar('mcollective::node::registration') %>
-<% if scope.lookupvar('mcollective::node::registration_collective') %>
+<% if scope.lookupvar('mcollective::node::registration_collective') != :undef %>
 registration_collective = <%= scope.lookupvar('mcollective::node::registration_collective') %>
 <%- end %>
 
