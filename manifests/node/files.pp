@@ -58,19 +58,6 @@ class mcollective::node::files {
     content => template('mcollective/server.cfg.erb'),
   }
 
-  file { '/etc/mcollective/facts.yaml':
-    ensure   => present,
-    backup   => false,
-    owner    => 'root',
-    group    => 'root',
-    mode     => '0400',
-    loglevel => debug,  # this is needed to avoid it being logged and reported
-                        # on every run
-                        # avoid including highly-dynamic facts as they will
-                        # cause unnecessary template writes
-    content  => template('mcollective/facts.yaml.erb'),
-  }
-
   # action policy plugin, while it's not packaged yet
   file { "${libdir}/mcollective/util":
     ensure  => directory,
