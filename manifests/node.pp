@@ -123,6 +123,19 @@ class mcollective::node (
   include ::ruby::gems
 
   class { '::mcollective::node::packages': } ->
+  file { '/etc/mcollective/facts.yaml':
+    ensure   => present,
+    backup   => false,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0400',
+    content  => template('mcollective/facts.yaml.erb'),
+    loglevel => 'warning',  # this is needed to avoid it being logged and reported
+                            # on every run
+                            # avoid including highly-dynamic facts as they will
+                            # cause unnecessary template writes and
+                            # service restarts
+  } ->
   class { '::mcollective::node::files': } ~>
   class { '::mcollective::node::service': }
 
