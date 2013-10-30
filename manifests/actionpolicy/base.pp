@@ -46,8 +46,6 @@ define mcollective::actionpolicy::base (
   validate_re($default_policy, '^(allow|deny)$',
     "\$default_policy must be either 'allow' or 'deny', got '${default_policy}'")
 
-  include concat::setup
-
   concat { "${policies_dir}/${name}.policy":
     owner => 'root',
     group => 'root',
