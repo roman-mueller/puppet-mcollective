@@ -29,6 +29,8 @@ class mcollective::params {
   $use_node = true
   $use_client = false
   $direct_addressing = 0
+  $registration = 'Agentlist'
+  $registerinterval = 300
 
   case $::osfamily {
     'Debian': {

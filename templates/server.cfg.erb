@@ -60,6 +60,10 @@ plugin.yaml = /etc/mcollective/facts.yaml
 
 classesfile = /var/lib/puppet/state/classes.txt
 
-registerinterval = 300
-registration = Agentlist
+# Registration
+registerinterval = <%= scope.lookupvar('mcollective::node::registerinterval') %>
+registration = <%= scope.lookupvar('mcollective::node::registration') %>
+<% if scope.lookupvar('mcollective::node::registration_collective') != :undef %>
+registration_collective = <%= scope.lookupvar('mcollective::node::registration_collective') %>
+<%- end %>
 
