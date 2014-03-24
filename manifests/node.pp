@@ -122,6 +122,7 @@ class mcollective::node (
   $registration = $mcollective::registration,
   $registration_collective = $mcollective::registration_collective,
   $registerinterval = $mcollective::registerinterval,
+  $ensure_service = $mcollective::node_ensure_service,
 ) {
 
   if !defined(Class['::mcollective']) {

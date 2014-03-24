@@ -141,6 +141,7 @@ class mcollective (
   $registerinterval = $mcollective::params::registerinterval,
   $registration_collective = undef,
   $ssl_source_dir = undef,
+  $node_ensure_service = running,
 ) inherits ::mcollective::params {
 
   include ::mcollective::directories
