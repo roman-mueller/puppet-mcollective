@@ -3,8 +3,11 @@ require 'spec_helper'
 describe 'mcollective::application' do
   let (:title) { 'foo' }
   let (:facts) { {
-    :osfamily => 'RedHat',
+    :id              => 'root',
+    :kernel          => 'Linux',
     :operatingsystem => 'RedHat',
+    :osfamily        => 'RedHat',
+    :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
   } }
 
   context 'when no source is passed' do

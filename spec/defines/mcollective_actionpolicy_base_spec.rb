@@ -3,8 +3,11 @@ require 'spec_helper'
 describe 'mcollective::actionpolicy::base' do
   let (:title) { 'bar' }
   let (:facts) { {
+    :id              => 'root',
+    :kernel          => 'Linux',
+    :operatingsystem => 'Debian',
     :osfamily        => 'Debian',
-    :operatingsystem => 'Debian'
+    :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
   } }
 
   context 'when using a wrong ensure value' do
