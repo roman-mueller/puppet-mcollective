@@ -1,5 +1,7 @@
 # MCollective Puppet Module
 
+[![Build Status](https://travis-ci.org/camptocamp/puppet-mcollective.png?branch=master)](https://travis-ci.org/camptocamp/puppet-mcollective)
+
 **This module manages MCollective.**
 
 It supports:
