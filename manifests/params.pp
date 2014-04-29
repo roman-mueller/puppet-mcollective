@@ -34,9 +34,9 @@ class mcollective::params {
 
   case $::osfamily {
     'Debian': {
-      $client_require = Package['rubygems', 'ruby-stomp']
-      $server_require = Package['rubygems', 'ruby-stomp']
-      $plugin_require = Package['rubygems', 'ruby-stomp']
+      $client_require = [ Class['ruby::gems'], Package['ruby-stomp'] ]
+      $server_require = [ Class['ruby::gems'], Package['ruby-stomp'] ]
+      $plugin_require = [ Class['ruby::gems'], Package['ruby-stomp'] ]
       $libdir = '/usr/share/mcollective/plugins'
     }
 
