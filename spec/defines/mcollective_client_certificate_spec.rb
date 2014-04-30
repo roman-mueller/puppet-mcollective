@@ -5,6 +5,7 @@ describe 'mcollective::client::certificate' do
   let (:facts) { {
     :id              => 'root',
     :kernel          => 'Linux',
+    :lsbdistid       => 'Debian',
     :operatingsystem => 'Debian',
     :osfamily        => 'Debian',
     :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',

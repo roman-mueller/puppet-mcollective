@@ -5,6 +5,7 @@ describe 'mcollective::application' do
   let (:facts) { {
     :id              => 'root',
     :kernel          => 'Linux',
+    :lsbdistid       => 'Debian',
     :operatingsystem => 'RedHat',
     :osfamily        => 'RedHat',
     :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',

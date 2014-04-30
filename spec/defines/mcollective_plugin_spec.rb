@@ -7,6 +7,7 @@ describe 'mcollective::plugin' do
     let (:facts) { {
       :id              => 'root',
       :kernel          => 'Linux',
+      :lsbdistid       => 'Debian',
       :operatingsystem => 'Debian',
       :osfamily        => 'Debian',
       :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
@@ -21,6 +22,7 @@ describe 'mcollective::plugin' do
     let (:facts) { {
       :id              => 'root',
       :kernel          => 'Linux',
+      :lsbdistid       => 'RedHat',
       :operatingsystem => 'RedHat',
       :osfamily        => 'RedHat',
       :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
