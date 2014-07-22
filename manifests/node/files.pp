@@ -22,6 +22,8 @@ class mcollective::node::files {
   validate_absolute_path($libdir)
   $daemonize = 1
 
+  $identity = $mcollective::node::identity
+
   $security_provider = $mcollective::node::security_provider
   validate_string($security_provider)
   $ssl_source_dir = $mcollective::node::ssl_source_dir

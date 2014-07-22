@@ -83,6 +83,7 @@
 #                                    Defaults to undef.
 #   ['ssl_source_dir']    - Where to get certificates from.
 #                           Defaults to undef.
+#   ['node_identity']     - The node's identity
 #
 # === Actions
 #
@@ -142,6 +143,7 @@ class mcollective (
   $registration_collective = undef,
   $ssl_source_dir = undef,
   $node_ensure_service = running,
+  $node_identity = $mcollective::identity,
 ) inherits ::mcollective::params {
 
   include ::mcollective::directories

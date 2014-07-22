@@ -71,6 +71,7 @@
 #                                    Defaults to undef.
 #   ['ssl_source_dir']    - Where to get certificates from.
 #                           Defaults to undef.
+#   ['identity']          - The node's identity
 #
 # === Actions
 #
@@ -123,6 +124,7 @@ class mcollective::node (
   $registration_collective = $mcollective::registration_collective,
   $registerinterval = $mcollective::registerinterval,
   $ensure_service = $mcollective::node_ensure_service,
+  $identity = $mcollective::node_identity,
 ) {
 
   if !defined(Class['::mcollective']) {
