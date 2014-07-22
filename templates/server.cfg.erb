@@ -4,6 +4,7 @@ collectives = mcollective
 libdir = <%= @libdir %>
 logfile = /var/log/mcollective.log
 loglevel = info
+identity = <%= @identity %>
 daemonize = <%= @daemonize %>
 direct_addressing = <%= scope.lookupvar('mcollective::node::direct_addressing') %>
 
