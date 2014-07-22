@@ -143,7 +143,7 @@ class mcollective (
   $registration_collective = undef,
   $ssl_source_dir = undef,
   $node_ensure_service = running,
-  $node_identity = $mcollective::identity,
+  $node_identity = $mcollective::params::node_identity,
 ) inherits ::mcollective::params {
 
   include ::mcollective::directories
