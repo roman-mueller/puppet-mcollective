@@ -1,7 +1,7 @@
 ---
 <%
         mco_facts = scope.to_hash.reject do |k,v|
-                k.to_s =~ /(uptime|timestamp|free|require)/
+                k.to_s =~ /(uptime|timestamp|free|require|ec2_metadata)/
         end
         mco_yaml = String.new
         mco_facts.each_key.sort.each do |fact|
