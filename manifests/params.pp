@@ -32,6 +32,7 @@ class mcollective::params {
   $registration = 'Agentlist'
   $registerinterval = 300
   $node_identity = $::fqdn
+  $default_discovery_method = 'mc'
 
   case $::osfamily {
     'Debian': {

@@ -58,6 +58,8 @@
 #                           Defaults to '0'.
 #   ['ssl_source_dir']    - Where to get certificates from.
 #                           Defaults to undef.
+#   ['default_discovery_method' ]  - The default discovery method for clients
+#                                    Defaults to 'mc'
 #
 # === Actions
 #
@@ -102,6 +104,7 @@ class mcollective::client (
   $cert_dir = $mcollective::cert_dir,
   $direct_addressing = $mcollective::direct_addressing,
   $ssl_source_dir = $mcollective::ssl_source_dir,
+  $default_discovery_method = $mcollective::default_discovery_method,
 ) {
 
   if !defined(Class['::mcollective']) {

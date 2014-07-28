@@ -84,6 +84,8 @@
 #   ['ssl_source_dir']    - Where to get certificates from.
 #                           Defaults to undef.
 #   ['node_identity']     - The node's identity
+#   ['default_discovery_method' ]  - The default discovery method for clients
+#                                    Defaults to 'mc'
 #
 # === Actions
 #
@@ -144,6 +146,7 @@ class mcollective (
   $ssl_source_dir = undef,
   $node_ensure_service = running,
   $node_identity = $mcollective::params::node_identity,
+  $default_discovery_method = $mcollective::params::default_discovery_method,
 ) inherits ::mcollective::params {
 
   include ::mcollective::directories
