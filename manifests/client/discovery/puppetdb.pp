@@ -2,7 +2,7 @@ class mcollective::client::discovery::puppetdb (
   $puppetdb = 'localhost',
   $use_ssl  = true,
   $ssl_key  = $mcollective::client::broker_ssl_key,
-  $ssl_cert = $mcollective::client::broker_ssl_key,
+  $ssl_cert = $mcollective::client::broker_ssl_cert,
   $ssl_ca   = $mcollective::client::broker_ssl_ca,
 ) {
 
