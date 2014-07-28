@@ -8,10 +8,16 @@ class mcollective::client::files {
   $libdir = $mcollective::params::libdir
   validate_absolute_path($libdir)
 
-  file { '/etc/mcollective/client.cfg':
+  concat { '/etc/mcollective/client.cfg':
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
+  }
+
+  concat::fragment { 'mcollective client.cfg base':
+    ensure  => present,
+    order   => '00',
+    target  => '/etc/mcollective/client.cfg',
     content => template('mcollective/client.cfg.erb'),
   }
 

@@ -19,7 +19,7 @@
 #
 # === Requires
 #
-# - `ripienaar/concat`
+# - `puppetlabs/concat`
 # - `puppetlabs/stdlib`
 #
 # === Sample Usage
