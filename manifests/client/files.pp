@@ -38,14 +38,14 @@ class mcollective::client::files {
     $broker_ssl_key = $mcollective::client::broker_ssl_key
     validate_absolute_path($broker_ssl_key)
     $key_source = $ssl_source_dir ? {
-      undef   => "/var/lib/puppet/ssl/private_keys/${::certname}.pem",
+      undef   => "/var/lib/puppet/ssl/private_keys/${::clientcert}.pem",
       default => "${ssl_source_dir}/mco-client.key",
     }
 
     $broker_ssl_cert = $mcollective::client::broker_ssl_cert
     validate_absolute_path($broker_ssl_cert)
     $cert_source = $ssl_source_dir ? {
-      undef   => "/var/lib/puppet/ssl/certs/${::certname}.pem",
+      undef   => "/var/lib/puppet/ssl/certs/${::clientcert}.pem",
       default => "${ssl_source_dir}/mco-client.crt",
     }
 
