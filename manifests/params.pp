@@ -31,7 +31,7 @@ class mcollective::params {
   $direct_addressing = 0
   $registration = 'Agentlist'
   $registerinterval = 300
-  $node_identity = $::fqdn
+  $node_identity = $::certname
   $default_discovery_method = 'mc'
 
   case $::osfamily {
