@@ -9,6 +9,7 @@ describe 'mcollective::client::certificate' do
     :operatingsystem => 'Debian',
     :osfamily        => 'Debian',
     :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    :clientcert      => 'foo.example.com',
   } }
 
   context 'when no key is passed' do

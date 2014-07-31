@@ -9,6 +9,7 @@ describe 'mcollective::actionpolicy::base' do
     :operatingsystem => 'Debian',
     :osfamily        => 'Debian',
     :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    :clientcert      => 'foo.example.com',
   } }
 
   context 'when using a wrong ensure value' do

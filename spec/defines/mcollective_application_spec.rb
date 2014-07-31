@@ -9,6 +9,7 @@ describe 'mcollective::application' do
     :operatingsystem => 'RedHat',
     :osfamily        => 'RedHat',
     :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    :clientcert      => 'foo.example.com',
   } }
 
   context 'when no source is passed' do

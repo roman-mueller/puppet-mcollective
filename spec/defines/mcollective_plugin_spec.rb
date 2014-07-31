@@ -11,6 +11,7 @@ describe 'mcollective::plugin' do
       :operatingsystem => 'Debian',
       :osfamily        => 'Debian',
       :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+      :clientcert      => 'foo.example.com',
     } }
 
     it { should contain_package('mcollective-agent-foo').with(
@@ -26,6 +27,7 @@ describe 'mcollective::plugin' do
       :operatingsystem => 'RedHat',
       :osfamily        => 'RedHat',
       :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+      :clientcert      => 'foo.example.com',
     } }
 
     it { should contain_package('mcollective-plugins-foo').with(
