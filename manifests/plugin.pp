@@ -25,6 +25,7 @@ define mcollective::plugin (
   $ensure='present',
   $type = 'agent',
   $old_names = true,
+  $base_name = $name,
 ) {
 
   include ::mcollective::params
@@ -33,11 +34,11 @@ define mcollective::plugin (
   validate_re($type, '\S+')
   validate_bool($old_names)
 
-  $new_package = "mcollective-${name}-${type}"
+  $new_package = "mcollective-${base_name}-${type}"
 
   $old_package = $::osfamily ? {
-    'Debian' => "mcollective-agent-${name}",
-    'RedHat' => "mcollective-plugins-${name}",
+    'Debian' => "mcollective-agent-${base_name}",
+    'RedHat' => "mcollective-plugins-${base_name}",
   }
 
   if $old_names {
