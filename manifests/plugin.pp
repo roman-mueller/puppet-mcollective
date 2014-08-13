@@ -36,9 +36,14 @@ define mcollective::plugin (
 
   $new_package = "mcollective-${base_name}-${type}"
 
+  $old_base_name = $type ? {
+    'agent' => $base_name,
+    default => "${base_name}-${type}",
+  }
+
   $old_package = $::osfamily ? {
-    'Debian' => "mcollective-agent-${base_name}",
-    'RedHat' => "mcollective-plugins-${base_name}",
+    'Debian' => "mcollective-agent-${old_base_name}",
+    'RedHat' => "mcollective-plugins-${old_base_name}",
   }
 
   if $old_names {
