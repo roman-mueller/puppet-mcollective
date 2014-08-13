@@ -34,4 +34,43 @@ describe 'mcollective::plugin' do
       :ensure => :present
     ) }
   end
+
+  context 'when using new names' do
+    let (:facts) { {
+      :id              => 'root',
+      :kernel          => 'Linux',
+      :lsbdistid       => 'Debian',
+      :operatingsystem => 'Debian',
+      :osfamily        => 'Debian',
+      :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+      :clientcert      => 'foo.example.com',
+    } }
+
+    let (:params) { {
+      :old_names => false,
+    } }
+
+    it { should contain_package('mcollective-agent-foo').with_ensure('absent') }
+    it { should contain_package('mcollective-foo-agent').with_ensure('present') }
+  end
+
+  context 'when setting type' do
+    let (:facts) { {
+      :id              => 'root',
+      :kernel          => 'Linux',
+      :lsbdistid       => 'Debian',
+      :operatingsystem => 'Debian',
+      :osfamily        => 'Debian',
+      :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+      :clientcert      => 'foo.example.com',
+    } }
+
+    let (:params) { {
+      :old_names => false,
+      :type      => 'client',
+    } }
+
+    it { should contain_package('mcollective-agent-foo').with_ensure('absent') }
+    it { should contain_package('mcollective-foo-client').with_ensure('present') }
+  end
 end
