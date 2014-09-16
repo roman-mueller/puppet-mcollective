@@ -44,7 +44,11 @@ class mcollective::params {
 
     'RedHat': {
       $client_require = Package['rubygems', 'rubygem-stomp']
-      $server_require = Package['rubygems', 'rubygem-stomp', 'rubygem-net-ping']
+      if $::lsbmajdistrelease != '7' {
+        $server_require = Package['rubygems', 'rubygem-stomp', 'rubygem-net-ping']
+      } else {
+        $server_require = Package['rubygems', 'rubygem-stomp']
+      }
       $plugin_require = Package['rubygems', 'rubygem-stomp']
       $libdir = '/usr/libexec/mcollective'
     }
