@@ -1,3 +1,9 @@
+2014-09-23 - Version 0.8.1
+
+- Use metadata.json instead of Modulefile
+- node_identity default to $::clientcert instead of $::fqdn
+- Add support for RHEL7
+
 2014-07-29 - Version 0.8.0
 
 - Add $node_identity
