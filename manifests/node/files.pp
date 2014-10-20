@@ -62,10 +62,10 @@ class mcollective::node::files {
 
   # action policy plugin, while it's not packaged yet
   file { "${libdir}/mcollective/util":
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
   }
   file { "${libdir}/mcollective/util/actionpolicy.rb":
     ensure => file,

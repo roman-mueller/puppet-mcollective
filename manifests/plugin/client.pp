@@ -23,8 +23,8 @@ define mcollective::plugin::client (
   $old_names = undef,
 ) {
   ::mcollective::plugin { "${name} client":
-    base_name  => $name,
-    type       => 'client',
-    old_names  => $old_names,
+    base_name => $name,
+    type      => 'client',
+    old_names => $old_names,
   }
 }

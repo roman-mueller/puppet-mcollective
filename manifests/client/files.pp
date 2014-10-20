@@ -9,9 +9,9 @@ class mcollective::client::files {
   validate_absolute_path($libdir)
 
   concat { '/etc/mcollective/client.cfg':
-    mode    => '0644',
-    owner   => 'root',
-    group   => 'root',
+    mode  => '0644',
+    owner => 'root',
+    group => 'root',
   }
 
   concat::fragment { 'mcollective client.cfg base':
@@ -22,10 +22,10 @@ class mcollective::client::files {
   }
 
   file { '/etc/bash_completion.d/mco':
-    mode    => '0755',
-    owner   => 'root',
-    group   => 'root',
-    source  => 'puppet:///modules/mcollective/bash_completion.sh',
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root',
+    source => 'puppet:///modules/mcollective/bash_completion.sh',
   }
 
   $security_provider = $mcollective::client::security_provider
