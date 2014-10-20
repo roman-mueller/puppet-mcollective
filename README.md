@@ -1,5 +1,6 @@
 # MCollective Puppet Module
 
+[![Puppet Forge](http://img.shields.io/puppetforge/v/camptocamp/mcollective.svg)](https://forge.puppetlabs.com/camptocamp/mcollective)
 [![Build Status](https://travis-ci.org/camptocamp/puppet-mcollective.png?branch=master)](https://travis-ci.org/camptocamp/puppet-mcollective)
 
 **This module manages MCollective.**
