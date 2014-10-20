@@ -1,3 +1,8 @@
+2010-10-20 - Version 1.0.0
+
+- Linting
+- Setup automatic Forge releases
+
 2014-09-23 - Version 0.8.1
 
 - Use metadata.json instead of Modulefile
