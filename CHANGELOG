@@ -1,3 +1,7 @@
+2010-10-30 - Version 1.0.2
+
+- Remove puppet 2.7 support in travis matrix
+
 2010-10-20 - Version 1.0.1
 
 - Linting
