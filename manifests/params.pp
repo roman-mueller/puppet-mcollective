@@ -44,7 +44,7 @@ class mcollective::params {
 
     'RedHat': {
       $client_require = Package['rubygems', 'rubygem-stomp']
-      if $::lsbmajdistrelease != '7' {
+      if $::operatingsystemmajrelease != '7' {
         $server_require = Package['rubygems', 'rubygem-stomp', 'rubygem-net-ping']
       } else {
         $server_require = Package['rubygems', 'rubygem-stomp']

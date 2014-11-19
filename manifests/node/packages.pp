@@ -29,7 +29,7 @@ class mcollective::node::packages {
     }
 
     'RedHat': {
-      if $::lsbmajdistrelease != '7' {
+      if $::operatingsystemmajrelease != '7' {
         package { ['rubygem-net-ping']:
           ensure => present,
           notify => Service['mcollective'],
