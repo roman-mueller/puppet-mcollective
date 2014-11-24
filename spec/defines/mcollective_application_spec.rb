@@ -3,14 +3,14 @@ require 'spec_helper'
 describe 'mcollective::application' do
   let (:title) { 'foo' }
   let (:facts) { {
-    :id                => 'root',
-    :kernel            => 'Linux',
-    :lsbdistid         => 'RedHat',
-    :lsbmajdistrelease => '7',
-    :operatingsystem   => 'RedHat',
-    :osfamily          => 'RedHat',
-    :path              => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-    :clientcert        => 'foo.example.com',
+    :id                        => 'root',
+    :kernel                    => 'Linux',
+    :operatingssytem           => 'RedHat',
+    :operatingsystemmajrelease => '7',
+    :operatingsystem           => 'RedHat',
+    :osfamily                  => 'RedHat',
+    :path                      => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    :clientcert                => 'foo.example.com',
   } }
 
   context 'when no source is passed' do

@@ -7,7 +7,6 @@ describe 'mcollective::plugin' do
     let (:facts) { {
       :id              => 'root',
       :kernel          => 'Linux',
-      :lsbdistid       => 'Debian',
       :operatingsystem => 'Debian',
       :osfamily        => 'Debian',
       :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
@@ -21,14 +20,13 @@ describe 'mcollective::plugin' do
 
   context 'when on RedHat' do
     let (:facts) { {
-      :id                => 'root',
-      :kernel            => 'Linux',
-      :lsbdistid         => 'RedHat',
-      :lsbmajdistrelease => '7',
-      :operatingsystem   => 'RedHat',
-      :osfamily          => 'RedHat',
-      :path              => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-      :clientcert        => 'foo.example.com',
+      :id                        => 'root',
+      :kernel                    => 'Linux',
+      :operatingsystem           => 'RedHat',
+      :operatingsystemmajrelease => '7',
+      :osfamily                  => 'RedHat',
+      :path                      => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+      :clientcert                => 'foo.example.com',
     } }
 
     it { should contain_package('mcollective-plugins-foo').with(
@@ -40,7 +38,6 @@ describe 'mcollective::plugin' do
     let (:facts) { {
       :id              => 'root',
       :kernel          => 'Linux',
-      :lsbdistid       => 'Debian',
       :operatingsystem => 'Debian',
       :osfamily        => 'Debian',
       :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
@@ -59,7 +56,6 @@ describe 'mcollective::plugin' do
     let (:facts) { {
       :id              => 'root',
       :kernel          => 'Linux',
-      :lsbdistid       => 'Debian',
       :operatingsystem => 'Debian',
       :osfamily        => 'Debian',
       :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
