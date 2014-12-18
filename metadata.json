@@ -1,6 +1,6 @@
 {
   "name": "camptocamp-mcollective",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "DevOps Team / Camptocamp",
   "summary": "Camptocamp MCollective Module",
   "license": "GNU GPLv3",
@@ -9,8 +9,17 @@
   "issues_url": "https://github.com/camptocamp/puppet-mcollective/issues",
   "description": "MCollective Module for Puppet",
   "dependencies": [
-    {"name":"camptocamp/ruby","version_requirement":"0.0.1"},
-    {"name":"puppetlabs/stdlib","version_requirement":"3.2.x"},
-    {"name":"puppetlabs/concat","version_requirement":"0.2.x"}
+    {
+      "name": "camptocamp/ruby",
+      "version_requirement": "0.0.1"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": "3.2.x"
+    },
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": "0.2.x"
+    }
   ]
 }
