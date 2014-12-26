@@ -2,73 +2,85 @@ require 'spec_helper'
 
 describe 'mcollective::client::certificate' do
   let (:title) { 'johndoe' }
-  let (:facts) { {
-    :id              => 'root',
-    :kernel          => 'Linux',
-    :lsbdistid       => 'Debian',
-    :operatingsystem => 'Debian',
-    :osfamily        => 'Debian',
-    :path            => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-    :clientcert      => 'foo.example.com',
-  } }
 
-  context 'when no key is passed' do
-    it 'should fail' do
-      expect { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem')
-      }.to raise_error(Puppet::Error, /You must pass either \$key_source or \$key_source_dir/)
+  let(:pre_condition) do
+    "class { '::mcollective':
+       broker_host       => 'localhost',
+       broker_port       => '61613',
+       security_provider => 'psk',
+       use_client        => true,
+    }
+    mcollective::actionpolicy::base { 'foo': }
+    "
+  end
+
+  on_supported_os.each do |os, facts|
+    context "on #{os}" do
+      let(:facts) do
+        facts.merge({
+          :concat_basedir => '/var/lib/puppet/concat',
+        })
+      end
+
+      context 'when no key is passed' do
+        it 'should fail' do
+          expect { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem')
+          }.to raise_error(Puppet::Error, /You must pass either \$key_source or \$key_source_dir/)
+        end
+      end
+
+      context 'when both key_source and key_source_dir are passed' do
+        let (:params) { {
+          :key_source     => '/tmp/johndoe.pem',
+          :key_source_dir => '/tmp/keys'
+        } }
+
+        it 'should fail' do
+          expect { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem')
+          }.to raise_error(Puppet::Error, /You must pass either \$key_source or \$key_source_dir/)
+        end
+      end
+
+
+      context 'when a wrong ensure passed' do
+        let (:params) { {
+          :key_source => '/tmp/johndoe.pem',
+          :ensure     => 'running'
+        } }
+
+        it 'should fail' do
+          expect { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem')
+          }.to raise_error(Puppet::Error, /\$ensure must be either.* got 'running'/)
+        end
+      end
+
+      context 'when specifying key_source' do
+        let (:params) { {
+          :key_source => '/tmp/johndoe.pem'
+        } }
+
+        it { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem').with(
+          :ensure => 'present',
+          :owner  => 'root',
+          :group  => 'root',
+          :mode   => '0640',
+          :source => '/tmp/johndoe.pem'
+        ) }
+      end
+
+      context 'when specifying key_source_dir' do
+        let (:params) { {
+          :key_source_dir => '/tmp/keys'
+        } }
+
+        it { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem').with(
+          :ensure => 'present',
+          :owner  => 'root',
+          :group  => 'root',
+          :mode   => '0640',
+          :source => '/tmp/keys/johndoe.pem'
+        ) }
+      end
     end
-  end
-
-  context 'when both key_source and key_source_dir are passed' do
-    let (:params) { {
-      :key_source     => '/tmp/johndoe.pem',
-      :key_source_dir => '/tmp/keys'
-    } }
-
-    it 'should fail' do
-      expect { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem')
-      }.to raise_error(Puppet::Error, /You must pass either \$key_source or \$key_source_dir/)
-    end
-  end
-
-
-  context 'when a wrong ensure passed' do
-    let (:params) { {
-      :key_source => '/tmp/johndoe.pem',
-      :ensure     => 'running'
-    } }
-
-    it 'should fail' do
-      expect { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem')
-      }.to raise_error(Puppet::Error, /\$ensure must be either.* got 'running'/)
-    end
-  end
-
-  context 'when specifying key_source' do
-    let (:params) { {
-      :key_source => '/tmp/johndoe.pem'
-    } }
-
-    it { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem').with(
-      :ensure => 'present',
-      :owner  => 'root',
-      :group  => 'root',
-      :mode   => '0640',
-      :source => '/tmp/johndoe.pem'
-    ) }
-  end
-
-  context 'when specifying key_source_dir' do
-    let (:params) { {
-      :key_source_dir => '/tmp/keys'
-    } }
-
-    it { should contain_file('/etc/mcollective/ssl/clients/johndoe.pem').with(
-      :ensure => 'present',
-      :owner  => 'root',
-      :group  => 'root',
-      :mode   => '0640',
-      :source => '/tmp/keys/johndoe.pem'
-    ) }
   end
 end
