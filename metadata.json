@@ -1,9 +1,9 @@
 {
   "name": "camptocamp-mcollective",
-  "version": "1.0.3",
-  "author": "DevOps Team / Camptocamp",
+  "version": "1.0.4",
+  "author": "Camptocamp",
   "summary": "Camptocamp MCollective Module",
-  "license": "GNU GPLv3",
+  "license": "Apache-2.0",
   "source": "https://github.com/camptocamp/puppet-mcollective",
   "project_page": "https://github.com/camptocamp/puppet-mcollective",
   "issues_url": "https://github.com/camptocamp/puppet-mcollective/issues",
