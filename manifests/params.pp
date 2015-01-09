@@ -6,7 +6,9 @@ class mcollective::params {
   $broker_ssl_cert = '/etc/mcollective/ssl/mco-client.crt'
   $broker_ssl_key = '/etc/mcollective/ssl/mco-client.key'
   $broker_ssl_ca = '/etc/mcollective/ssl/ca.pem'
+  # lint:ignore:empty_string_assignment
   $security_secret = ''
+  # lint:endignore
   $security_ssl_server_private = '/etc/mcollective/ssl/server-private.pem'
   $security_ssl_server_public = '/etc/mcollective/ssl/server-public.pem'
   $security_ssl_client_private = false

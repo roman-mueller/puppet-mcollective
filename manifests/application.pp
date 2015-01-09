@@ -21,8 +21,8 @@
 #   }
 #
 define mcollective::application (
-  $ensure='present',
-  $source=''
+  $ensure = 'present',
+  $source = undef,
 ) {
   if !defined(Class['mcollective::client']) {
     fail('You must declare class mcollective::client before using mcollective::application')
@@ -33,7 +33,7 @@ define mcollective::application (
   validate_absolute_path($libdir)
 
   $filesrc = $source ? {
-    ''      => "puppet:///modules/${module_name}/application/${name}.rb",
+    undef   => "puppet:///modules/${module_name}/application/${name}.rb",
     default => $source,
   }
 

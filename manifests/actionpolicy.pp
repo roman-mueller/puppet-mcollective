@@ -53,8 +53,8 @@
 #
 define mcollective::actionpolicy (
   $ensure = 'present',
-  $agent = '',
-  $rpccaller = '',
+  $agent = undef,
+  $rpccaller = undef,
   $auth = 'allow',
   $actions = ['*'],
   $facts = ['*'],
@@ -62,7 +62,7 @@ define mcollective::actionpolicy (
   $order = '50',
 ) {
   $_rpccaller = $rpccaller ? {
-    ''      => inline_template('<%= @name.split("@")[0] %>'),
+    undef   => inline_template('<%= @name.split("@")[0] %>'),
     default => $rpccaller,
   }
 
@@ -70,7 +70,7 @@ define mcollective::actionpolicy (
     "\$rpccaller must be of the form 'uid=' or 'cert=', got '${_rpccaller}'")
 
   $_agent = $agent ? {
-    ''      => inline_template('<%= @name.split("@")[1] %>'),
+    undef   => inline_template('<%= @name.split("@")[1] %>'),
     default => $agent,
   }
 
