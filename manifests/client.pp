@@ -113,6 +113,4 @@ class mcollective::client (
 
   class { '::mcollective::client::packages': } ->
   class { '::mcollective::client::files': }
-
-  Class['mcollective::client'] -> Mcollective::Application <| |>
 }

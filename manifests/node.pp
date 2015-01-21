@@ -139,11 +139,7 @@ class mcollective::node (
   class { '::mcollective::node::files': } ~>
   class { '::mcollective::node::service': }
 
-  # Plugins need to refresh MCollective
   # Refreshing requires files
-  Mcollective::Plugin <| |> ~>
-  class { '::mcollective::node::refresh': }
   Class['::mcollective::node::files'] ->
-  Class['::mcollective::node::refresh']
-
+  class { '::mcollective::node::refresh': }
 }

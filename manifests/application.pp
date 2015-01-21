@@ -44,4 +44,6 @@ define mcollective::application (
     group  => 'root',
     mode   => '0755',
   }
+
+  Class['mcollective::client'] -> Mcollective::Application[$title]
 }

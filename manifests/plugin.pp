@@ -60,4 +60,6 @@ define mcollective::plugin (
       require => $mcollective::params::plugin_require,
     }
   }
+
+  Mcollective::Plugin[$title] ~> Class['mcollective::node::refresh']
 }
