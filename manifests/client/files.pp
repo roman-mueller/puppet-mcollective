@@ -8,26 +8,6 @@ class mcollective::client::files {
   $libdir = $mcollective::params::libdir
   validate_absolute_path($libdir)
 
-  concat { '/etc/mcollective/client.cfg':
-    mode  => '0644',
-    owner => 'root',
-    group => 'root',
-  }
-
-  concat::fragment { 'mcollective client.cfg base':
-    ensure  => present,
-    order   => '00',
-    target  => '/etc/mcollective/client.cfg',
-    content => template('mcollective/client.cfg.erb'),
-  }
-
-  file { '/etc/bash_completion.d/mco':
-    mode   => '0755',
-    owner  => 'root',
-    group  => 'root',
-    source => 'puppet:///modules/mcollective/bash_completion.sh',
-  }
-
   $security_provider = $mcollective::client::security_provider
   validate_string($security_provider)
   $ssl_source_dir = $mcollective::client::ssl_source_dir
@@ -88,5 +68,25 @@ class mcollective::client::files {
 fi
 '),
     }
+  }
+
+  concat { '/etc/mcollective/client.cfg':
+    mode  => '0644',
+    owner => 'root',
+    group => 'root',
+  }
+
+  concat::fragment { 'mcollective client.cfg base':
+    ensure  => present,
+    order   => '00',
+    target  => '/etc/mcollective/client.cfg',
+    content => template('mcollective/client.cfg.erb'),
+  }
+
+  file { '/etc/bash_completion.d/mco':
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root',
+    source => 'puppet:///modules/mcollective/bash_completion.sh',
   }
 }
