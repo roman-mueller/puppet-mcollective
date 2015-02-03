@@ -23,6 +23,10 @@ class mcollective::node::files {
   $daemonize = 1
 
   $identity = $mcollective::node::identity
+  $puppetca_cadir = $mcollective::node::puppetca_cadir
+  $rpcauthorization = $mcollective::node::rpcauthorization
+  $rpcauthprovider = $mcollective::node::rpcauthprovider
+  $registration_collective = $mcollective::node::registration_collective
 
   $security_provider = $mcollective::node::security_provider
   validate_string($security_provider)
