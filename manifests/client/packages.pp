@@ -6,6 +6,6 @@ class mcollective::client::packages {
 
   package { 'mcollective-client':
     ensure  => present,
-    require => $mcollective::params::client_require
+    require => $mcollective::params::client_require,
   }
 }

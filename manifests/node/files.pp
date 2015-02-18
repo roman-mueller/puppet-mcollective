@@ -41,14 +41,14 @@ class mcollective::node::files {
 
     file {
       $security_ssl_private:
-        ensure => present,
+        ensure => file,
         owner  => root,
         group  => root,
         mode   => '0600',
         source => "${ssl_source_dir}/mco-server.key";
 
       $security_ssl_public:
-        ensure => present,
+        ensure => file,
         owner  => root,
         group  => root,
         mode   => '0644',
@@ -57,7 +57,7 @@ class mcollective::node::files {
   }
 
   file { '/etc/mcollective/server.cfg':
-    ensure  => present,
+    ensure  => file,
     mode    => '0640',
     owner   => 'root',
     group   => 'root',

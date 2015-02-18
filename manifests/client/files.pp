@@ -54,7 +54,7 @@ class mcollective::client::files {
 
     $broker_user = $mcollective::client::broker_user
     file { '/etc/profile.d/mco-client.sh':
-      ensure  => present,
+      ensure  => file,
       owner   => 'root',
       group   => 'root',
       mode    => '0755',
