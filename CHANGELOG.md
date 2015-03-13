@@ -1,3 +1,8 @@
+## 2015-03-13 - Version 1.0.6
+
+- Remove PATH from facts updating cron entry
+- Various unit tests improvements
+
 ## 2015-02-03 - Version 1.0.5
 
 - Fix assignment of variables to empty strings (GH #48)
