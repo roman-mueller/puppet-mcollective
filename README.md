@@ -1,7 +1,10 @@
 # MCollective Puppet Module
 
-[![Puppet Forge](http://img.shields.io/puppetforge/v/camptocamp/mcollective.svg)](https://forge.puppetlabs.com/camptocamp/mcollective)
-[![Build Status](https://travis-ci.org/camptocamp/puppet-mcollective.png?branch=master)](https://travis-ci.org/camptocamp/puppet-mcollective)
+[![Puppet Forge Version](http://img.shields.io/puppetforge/v/camptocamp/mcollective.svg)](https://forge.puppetlabs.com/camptocamp/mcollective)
+[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/camptocamp/mcollective.svg)](https://forge.puppetlabs.com/camptocamp/mcollective)
+[![Build Status](https://img.shields.io/travis/camptocamp/puppet-mcollective/master.svg)](https://travis-ci.org/camptocamp/puppet-mcollective)
+[![Gemnasium](https://img.shields.io/gemnasium/camptocamp/puppet-mcollective.svg)](https://gemnasium.com/camptocamp/puppet-mcollective)
+[![By Camptocamp](https://img.shields.io/badge/by-camptocamp-fb7047.svg)](http://www.camptocamp.com)
 
 **This module manages MCollective.**
 
