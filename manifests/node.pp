@@ -134,12 +134,15 @@ class mcollective::node (
   include ::mcollective::params
   include ::ruby::gems
 
+  anchor { 'mcollective::node::begin': } ->
   class { '::mcollective::node::packages': } ->
   class { '::mcollective::node::factsource::yaml': } ->
   class { '::mcollective::node::files': } ~>
   class { '::mcollective::node::service': }
+  anchor { 'mcollective::node::end': }
 
   # Refreshing requires files
   Class['::mcollective::node::files'] ->
-  class { '::mcollective::node::refresh': }
+  class { '::mcollective::node::refresh': } ->
+  Anchor['mcollective::node::end']
 }

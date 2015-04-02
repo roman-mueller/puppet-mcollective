@@ -152,15 +152,19 @@ class mcollective (
   $default_discovery_method = $mcollective::params::default_discovery_method,
 ) inherits ::mcollective::params {
 
-  include ::mcollective::directories
+  anchor { 'mcollective::begin': } ->
+  class { '::mcollective::directories': } ->
+  anchor { 'mcollective::end': }
 
   if ($use_node) {
-    Class['::mcollective'] ->
-    class { '::mcollective::node': }
+    Anchor['mcollective::begin'] ->
+    class { '::mcollective::node': } ->
+    Anchor['mcollective::end']
   }
 
   if ($use_client) {
-    Class['::mcollective'] ->
-    class { '::mcollective::client': }
+    Anchor['mcollective::begin'] ->
+    class { '::mcollective::client': } ->
+    Anchor['mcollective::end']
   }
 }

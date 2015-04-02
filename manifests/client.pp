@@ -111,6 +111,8 @@ class mcollective::client (
     fail ('You must declare the mcollective class before the mcollective::client class')
   }
 
+  anchor { 'mcollective::client::begin': } ->
   class { '::mcollective::client::packages': } ->
-  class { '::mcollective::client::files': }
+  class { '::mcollective::client::files': } ->
+  anchor { 'mcollective::client::end': }
 }
