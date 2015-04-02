@@ -1,3 +1,8 @@
+## 2015-04-02 - Release 1.1.0
+
+- Add defaults to main class parameters
+- Update acceptance tests boxes
+
 ## 2015-03-24 - Release 1.0.7
 
 - Various spec improvements
