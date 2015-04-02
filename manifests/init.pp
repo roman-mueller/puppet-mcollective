@@ -15,7 +15,9 @@
 #   ['use_client']        - Whether to install an MCollective client.
 #                           Defaults to false.
 #   ['broker_host']       - The middleware broker host to use.
+#                           Defaults to $::servername.
 #   ['broker_port']       - The middleware broker port to use.
+#                           Defaults to '61614'.
 #   ['broker_vhost']      - The middleware broker vhost to use.
 #                           Currently only used with RabbitMQ.
 #   ['broker_user']       - The middleware broker user to use.
@@ -108,8 +110,8 @@
 #   }
 #
 class mcollective (
-  $broker_host,
-  $broker_port,
+  $broker_host = $::servername,
+  $broker_port = '61614',
   $security_provider = 'ssl',
   $use_node = $mcollective::params::use_node,
   $use_client = $mcollective::params::use_client,
