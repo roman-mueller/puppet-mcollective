@@ -4,6 +4,7 @@
 class mcollective::node::refresh {
   exec { 'reload mcollective':
     command     => 'pkill -USR1 -f "ruby.*mcollectived"',
+    path        => $::path,
     refreshonly => true,
   }
 }
