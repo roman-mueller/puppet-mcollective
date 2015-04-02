@@ -33,6 +33,7 @@
 #                           Defaults to Puppet's CA certificate.
 #   ['security_provider'] - The security provider to use.
 #                           Currently supported are 'psk' and 'ssl'.
+#                           Defaults to 'ssl'.
 #   ['security_secret']   - If PSK is used, the value of the shared password.
 #   ['security_ssl_server_private'] - If SSL is used, the path to the SSL
 #                                     private server key (shared).
@@ -109,7 +110,7 @@
 class mcollective (
   $broker_host,
   $broker_port,
-  $security_provider,
+  $security_provider = 'ssl',
   $use_node = $mcollective::params::use_node,
   $use_client = $mcollective::params::use_client,
   $broker_vhost = $mcollective::params::broker_vhost,
