@@ -1,3 +1,7 @@
+## 2015-04-03 - Release 1.1.1
+
+- Use anchors in top classes
+
 ## 2015-04-02 - Release 1.1.0
 
 - Add defaults to main class parameters
