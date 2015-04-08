@@ -1,3 +1,8 @@
+## 2015-04-08 - Release 2.0.0
+
+- Restart mcollective when plugins are updated
+- Remove mcollective::node::refresh (breaking change)
+
 ## 2015-04-03 - Release 1.1.1
 
 - Use anchors in top classes
