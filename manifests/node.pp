@@ -140,9 +140,4 @@ class mcollective::node (
   class { '::mcollective::node::files': } ~>
   class { '::mcollective::node::service': }
   anchor { 'mcollective::node::end': }
-
-  # Refreshing requires files
-  Class['::mcollective::node::files'] ->
-  class { '::mcollective::node::refresh': } ->
-  Anchor['mcollective::node::end']
 }

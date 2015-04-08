@@ -61,5 +61,5 @@ define mcollective::plugin (
     }
   }
 
-  Mcollective::Plugin[$title] ~> Class['mcollective::node::refresh']
+  Mcollective::Plugin[$title] ~> Class['mcollective::node::service']
 }
