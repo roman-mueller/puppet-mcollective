@@ -71,11 +71,12 @@ class mcollective::node::files {
     group  => 'root',
     mode   => '0755',
   }
+  $module_path = get_module_path($module_name)
   file { "${libdir}/mcollective/util/actionpolicy.rb":
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => "puppet:///modules/${module_name}/actionpolicy.rb",
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => file("${module_path}/files/actionpolicy.rb"),
   }
 }

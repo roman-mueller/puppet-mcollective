@@ -83,10 +83,11 @@ fi
     content => template('mcollective/client.cfg.erb'),
   }
 
+  $module_path = get_module_path($module_name)
   file { '/etc/bash_completion.d/mco':
-    mode   => '0755',
-    owner  => 'root',
-    group  => 'root',
-    source => 'puppet:///modules/mcollective/bash_completion.sh',
+    mode    => '0755',
+    owner   => 'root',
+    group   => 'root',
+    content => file("${module_path}/files/bash_completion.sh"),
   }
 }
