@@ -1,7 +1,7 @@
 fixtures:
-  repositories:
-    "ruby": "git://github.com/camptocamp/puppet-ruby.git"
-    "stdlib": "git://github.com/puppetlabs/puppetlabs-stdlib.git"
-    "concat": "git://github.com/puppetlabs/puppetlabs-concat.git"
+  forge_modules:
+    ruby: 'camptocamp-ruby'
+    stdlib: 'puppetlabs-stdlib'
+    concat: 'puppetlabs-concat'
   symlinks:
     "mcollective": "#{source_dir}"
