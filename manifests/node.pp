@@ -138,6 +138,6 @@ class mcollective::node (
   class { '::mcollective::node::packages': } ->
   class { '::mcollective::node::factsource::yaml': } ->
   class { '::mcollective::node::files': } ~>
-  class { '::mcollective::node::service': }
+  class { '::mcollective::node::service': } ->
   anchor { 'mcollective::node::end': }
 }
