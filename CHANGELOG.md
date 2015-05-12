@@ -1,3 +1,7 @@
+## 2015-05-12 - Release 2.0.5
+
+Fix relationship for anchor
+
 ## 2015-05-12 - Release 2.0.4
 
 Don't pin beaker
