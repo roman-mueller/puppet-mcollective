@@ -1,3 +1,7 @@
+## 2015-05-13 - Release 2.0.7
+
+Add puppet-lint-file_source_rights-check gem
+
 ## 2015-05-13 - Release 2.0.6
 
 Fix Gemfile
