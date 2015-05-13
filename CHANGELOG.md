@@ -1,3 +1,7 @@
+## 2015-05-13 - Release 2.0.6
+
+Fix Gemfile
+
 ## 2015-05-12 - Release 2.0.5
 
 Fix relationship for anchor
