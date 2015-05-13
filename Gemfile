@@ -39,6 +39,4 @@ else
   gem 'puppet', :require => false
 end
 
-gem 'ruby-augeas', :require => false
-
 # vim:ft=ruby
