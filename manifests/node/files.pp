@@ -19,7 +19,9 @@ class mcollective::node::files {
 
   # Variables for the templates
   $libdir = $mcollective::params::libdir
+  $cfgdir = $mcollective::params::cfgdir
   validate_absolute_path($libdir)
+  validate_absolute_path($cfgdir)
   $daemonize = 1
 
   $identity = $mcollective::node::identity
@@ -56,7 +58,7 @@ class mcollective::node::files {
     }
   }
 
-  file { '/etc/mcollective/server.cfg':
+  file { "${cfgdir}/server.cfg":
     ensure  => file,
     mode    => '0640',
     owner   => 'root',

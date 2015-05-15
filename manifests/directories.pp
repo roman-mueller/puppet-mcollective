@@ -2,7 +2,11 @@
 #
 # Manages the basic directories for MCollective
 class mcollective::directories {
-  file { ['/etc/mcollective', '/etc/mcollective/ssl']:
+
+  $cfgdir = $mcollective::params::cfgdir
+  validate_absolute_path($cfgdir)
+
+  file { [ "${cfgdir}", "${cfgdir}/ssl" ]:
     ensure => 'directory',
     owner  => 'root',
     group  => 'root',

@@ -47,6 +47,6 @@ plugin.<%= scope.lookupvar('mcollective::client::connector') %>.pool.1.ssl.ca = 
 
 # Facts
 factsource = yaml
-plugin.yaml = /etc/mcollective/facts.yaml
+plugin.yaml = <%= @cfgdir %>/facts.yaml
 
 default_discovery_method = <%= scope.lookupvar('mcollective::client::default_discovery_method') %>

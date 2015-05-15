@@ -6,7 +6,9 @@ class mcollective::client::files {
 
   # For the templates
   $libdir = $mcollective::params::libdir
+  $cfgdir = $mcollective::params::cfgdir
   validate_absolute_path($libdir)
+  validate_absolute_path($cfgdir)
 
   $security_provider = $mcollective::client::security_provider
   validate_string($security_provider)
@@ -70,7 +72,7 @@ fi
     }
   }
 
-  concat { '/etc/mcollective/client.cfg':
+  concat { "${cfgdir}/client.cfg":
     mode  => '0644',
     owner => 'root',
     group => 'root',
@@ -79,7 +81,7 @@ fi
   concat::fragment { 'mcollective client.cfg base':
     ensure  => present,
     order   => '00',
-    target  => '/etc/mcollective/client.cfg',
+    target  => "${cfgdir}/client.cfg",
     content => template('mcollective/client.cfg.erb'),
   }
 

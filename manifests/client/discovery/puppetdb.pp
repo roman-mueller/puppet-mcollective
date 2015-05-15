@@ -5,6 +5,8 @@ class mcollective::client::discovery::puppetdb (
   $ssl_cert = $mcollective::client::broker_ssl_cert,
   $ssl_ca   = $mcollective::client::broker_ssl_ca,
 ) {
+  $cfgdir = $mcollective::params::cfgdir
+  validate_absolute_path($cfgdir)
 
   if $use_ssl {
     $content = "
@@ -26,7 +28,7 @@ plugin.discovery.puppetdb.port = 8080
   concat::fragment { 'mcollective client.cfg puppetdb discovery':
     ensure  => 'present',
     order   => '99',
-    target  => '/etc/mcollective/client.cfg',
+    target  => "${cfgdir}/client.cfg",
     content => $content,
   }
 

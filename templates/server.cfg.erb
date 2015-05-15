@@ -56,7 +56,7 @@ plugin.puppetca.cadir = <%= @puppetca_cadir %>
 
 # Facts
 factsource = yaml
-plugin.yaml = /etc/mcollective/facts.yaml
+plugin.yaml = <%= @cfgdir %>/facts.yaml
 
 classesfile = /var/lib/puppet/state/classes.txt
 

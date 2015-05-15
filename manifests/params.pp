@@ -3,18 +3,23 @@ class mcollective::params {
   $broker_user = 'guest'
   $broker_password = 'guest'
   $broker_ssl = true
-  $broker_ssl_cert = '/etc/mcollective/ssl/mco-client.crt'
-  $broker_ssl_key = '/etc/mcollective/ssl/mco-client.key'
-  $broker_ssl_ca = '/etc/mcollective/ssl/ca.pem'
+  if versioncmp($::puppetversion, '4.0.0') >= 0 {
+    $cfgdir = '/etc/puppetlabs/mcollective'
+  } else {
+    $cfgdir = '/etc/mcollective'
+  }
+  $broker_ssl_cert = "${cfgdir}/ssl/mco-client.crt"
+  $broker_ssl_key = "${cfgdir}/ssl/mco-client.key"
+  $broker_ssl_ca = "${cfgdir}/ssl/ca.pem"
   # lint:ignore:empty_string_assignment
   $security_secret = ''
   # lint:endignore
-  $security_ssl_server_private = '/etc/mcollective/ssl/server-private.pem'
-  $security_ssl_server_public = '/etc/mcollective/ssl/server-public.pem'
+  $security_ssl_server_private = "${cfgdir}/ssl/server-private.pem"
+  $security_ssl_server_public = "${cfgdir}/ssl/server-public.pem"
   $security_ssl_client_private = false
   $security_ssl_client_public = false
-  $security_aes_server_private = '/etc/mcollective/ssl/server-private.pem'
-  $security_aes_server_public = '/etc/mcollective/ssl/server-public.pem'
+  $security_aes_server_private = "${cfgdir}/ssl/server-private.pem"
+  $security_aes_server_public = "${cfgdir}/ssl/server-public.pem"
   $security_aes_client_private = false
   $security_aes_client_public = false
   $security_aes_send_pubkey = 0
@@ -26,8 +31,8 @@ class mcollective::params {
   $rpcauthprovider = 'action_policy'
   $rpcauth_allow_unconfigured = 0
   $rpcauth_enable_default = 1
-  $cert_dir = '/etc/mcollective/ssl/clients'
-  $policies_dir = '/etc/mcollective/policies'
+  $cert_dir = "${cfgdir}/ssl/clients"
+  $policies_dir = "${cfgdir}/policies"
   $use_node = true
   $use_client = false
   $direct_addressing = 0
@@ -52,7 +57,11 @@ class mcollective::params {
         $server_require = Package['rubygems', 'rubygem-stomp']
       }
       $plugin_require = Package['rubygems', 'rubygem-stomp']
-      $libdir = '/usr/libexec/mcollective'
+      if versioncmp($::puppetversion, '4.0.0') >= 0 {
+        $libdir = '/opt/puppetlabs/puppet/lib/ruby/vendor_ruby'
+      } else {
+        $libdir = '/usr/libexec/mcollective'
+      }
     }
 
     default: {
